@@ -1,0 +1,73 @@
+# Creation date : 18.03.2024
+# Created by : CSR
+# Description : This compose file creates a stack of two containers (nodejs + mysql)
+#version: "2"
+
+# Updated date : 27.05.2024
+# Updated by : ALO
+# Description : This docker compose creates a stack of 3 contaainers (nodejs + vuejs + mysql)
+
+services:
+  db:
+    image: mysql:8.0.30
+    container_name: db_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_user_pass
+      MYSQL_DATABASE: db_WebStore
+    restart: always
+    ports:
+      - "6033:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.0
+    container_name: pma_container
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - "8081:80"
+
+  nodejs:
+    build:
+      context: .
+      dockerfile: nodejs.dockerfile
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - db
+    volumes:
+      - ./app:/home/node/app
+      - /home/node/app/node_modules
+    expose:
+      - "443"
+    ports:
+      - "443:443"
+    command: "npm start"
+    #command: "npm run dev"
+
+  vuejs:
+    build:
+      context: .
+      dockerfile: vuejs.dockerfile
+    working_dir: /home/vue/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./WebShopFrontEnd:/home/vue/app
+      - /home/vue/app/node_modules
+    ports:
+      - "5173:5173"
+    command: "npm run dev"
+
+volumes:
+  dbdata:
