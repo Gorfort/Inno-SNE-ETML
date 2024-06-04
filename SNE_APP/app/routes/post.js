@@ -43,6 +43,7 @@ postRouter.get("/:id", auth, (req, res) => {
   });
 });
 
+// Route qui permet de mettre à jour une publication
 postRouter.put("/:id", auth, (req, res) => {
   const query =
     "UPDATE `t_posts` SET `title`= ?,`content`= ? WHERE idPost = ? ";
@@ -74,7 +75,7 @@ postRouter.post("/", auth, (req, res) => {
     "INSERT INTO `t_posts`(`title`, `content`, `fk_User`) VALUES (?,?,?)";
   connection.query(
     query,
-    [req.body.title, req.body.content, userId],
+    [req.body.title, req.body.content, req.user.userId],
     (error, result) => {
       if (error) {
         const message =
@@ -86,6 +87,25 @@ postRouter.post("/", auth, (req, res) => {
       }
     }
   );
+});
+
+// Routes qui permet d'ajouter une publication
+postRouter.delete("/:id", auth, (req, res) => {
+  const query = "DELETE FROM `t_posts` WHERE idPost = ?";
+  connection.query(query, [req.params.id], (error, result) => {
+    if (error) {
+      const message = "Erreur du serveur interne, Veuillez ressayer plus tard";
+      return res.status(500).json({ message });
+    }
+
+    if (result.affectedRows === 0) {
+      const message = "Aucun posts trouvé";
+      return res.status(404).json({ message });
+    } else {
+      console.log(result);
+      res.json({ message: "La publication à bien été suprimée" });
+    }
+  });
 });
 
 export default postRouter;
