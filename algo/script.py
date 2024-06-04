@@ -1,6 +1,5 @@
-"""
 from json import load
-from requests import get, delete
+from requests import get, put, delete
 from time import sleep
 
 class Post:
@@ -30,10 +29,14 @@ class Post:
             print("Aucun nouveau post à été trouvé !!!")
 
 
-    def get_allPost(self):
+    def get_posts(self):
         req = get('http://localhost:3000/api/products')
         print("Les posts ont bien été récupéré")
         return req.json()['data']
+    
+    def put_post(self, id, data):
+        put(url='http://localhost:3000/api/comments/' + id, data=data)
+        print("Le post a bien été modifié")
 
     def delete_post(self, id):
         delete('http://localhost:3000/api/comments/' + id)
@@ -42,13 +45,7 @@ class Post:
 post = Post()
 
 while True:
-    post.posts = post.get_allPost()
+    post.posts = post.get_posts()
     post.check_post()
     sleep(2)
     print("\n")
-"""
-from time import sleep
-
-while True:
-    print("Hello, World")
-    sleep(1)

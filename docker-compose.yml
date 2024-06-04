@@ -1,8 +1,43 @@
 version: '3.8'
 services:
-  app:
+  db:
     build:
-      context: .
+      context: ./db
       dockerfile: Dockerfile
-    expose:
-      - 3000
+    ports:
+      - '3306:3306'
+    volumes:
+      - db-data:/var/lib/mysql
+  phpmyadmin:
+    build:
+      context: ./pma
+      dockerfile: Dockerfile
+    links:
+      - db
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - 8081:80
+  backend:
+    build:
+      context: ./back
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    volumes:
+      - ./app:/home/node/app
+      - /home/node/app/node_modules
+    ports:
+      - '3000'
+  algo:
+    build:
+      context: ./algo
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+      - backend
+volumes:
+  db-data:
+networks:
+  default:
