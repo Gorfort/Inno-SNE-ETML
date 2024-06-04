@@ -37,8 +37,17 @@ connection.connect((error) => {
 // // Démarrage du serveur avec le certificat ssl (HTTPS)
 // https.createServer(options, app).listen(443);
 
-// Démarrage du serveur en HTTP
-app.listen(443);
+// Routes pour les publications
+import postRouter from "./routes/post.js";
+app.use("/post", postRouter);
+
+// Routes pour les Admins
+import adminRouter from "./routes/admin.js";
+app.use("/admin", adminRouter);
+
+// Routes pour les commentaires
+import commentRouter from "./routes/comment.js";
+app.use("/comment", commentRouter);
 
 // Route qui permet de voir les users
 import userRouter from "./routes/User.js";
@@ -47,3 +56,6 @@ app.use("/user", userRouter);
 // Route qui permet de se login
 import loginRouter from "./routes/login.js";
 app.use("/login", loginRouter);
+
+// Démarrage du serveur en HTTP
+app.listen(443);

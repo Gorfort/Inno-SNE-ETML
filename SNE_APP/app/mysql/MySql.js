@@ -6,7 +6,7 @@ const connection = mysql.createConnection({
   port: "3306",
   user: "root",
   password: "root",
-  database: "db_WebStore",
+  database: "db_esn_social_network",
 });
 
 export default connection;

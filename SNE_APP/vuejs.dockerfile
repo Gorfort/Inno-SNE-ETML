@@ -3,10 +3,10 @@ FROM node:16-alpine
 RUN npm install -g @vue/cli
 
 WORKDIR /home/vue/app
-COPY WebShopFrontEnd/package.json .
+COPY SNE_FRONT/package.json .
 
 RUN npm install
-COPY WebShopFrontEnd/ ./ 
+COPY SNE_FRONT/ ./ 
 
 EXPOSE 5173
 CMD ["npm", "run", "dev", "main.js"]
