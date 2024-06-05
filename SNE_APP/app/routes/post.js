@@ -54,7 +54,7 @@ postRouter.put("/:id", auth, (req, res) => {
       if (error) {
         const message =
           "Erreur du serveur interne, veuillez ressayer plus tard.";
-        req.status(500).json({ message });
+        res.status(500).json({ message });
       } else {
         console.log(result);
         res.json({ message: "La publication à bien été modifiée" });
