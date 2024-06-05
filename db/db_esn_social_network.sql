@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : db:3306
--- Généré le : mar. 04 juin 2024 à 10:53
+-- Généré le : mer. 05 juin 2024 à 13:04
 -- Version du serveur : 8.0.30
 -- Version de PHP : 8.0.27
 
@@ -30,19 +30,20 @@ USE `db_esn_social_network`;
 --
 
 CREATE TABLE `t_comments` (
-  `idComments` int NOT NULL,
+  `idComment` int NOT NULL,
   `comment` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `fk_User` int NOT NULL,
-  `fk_Posts` int NOT NULL
+  `fk_Post` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `t_comments`
 --
 
-INSERT INTO `t_comments` (`idComments`, `comment`, `fk_User`, `fk_Posts`) VALUES
+INSERT INTO `t_comments` (`idComment`, `comment`, `fk_User`, `fk_Post`) VALUES
 (1, 'Très belle publication hâte de voir le réseaux social', 2, 1),
-(2, 'Effectivement très belle deuxième publication', 1, 2);
+(2, 'Effectivement très belle deuxième publication', 1, 2),
+(4, 'Test d\'un deuxième commentaire', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -51,7 +52,7 @@ INSERT INTO `t_comments` (`idComments`, `comment`, `fk_User`, `fk_Posts`) VALUES
 --
 
 CREATE TABLE `t_posts` (
-  `idPosts` int NOT NULL,
+  `idPost` int NOT NULL,
   `title` varchar(50) DEFAULT NULL,
   `content` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `fk_User` int NOT NULL
@@ -61,7 +62,7 @@ CREATE TABLE `t_posts` (
 -- Déchargement des données de la table `t_posts`
 --
 
-INSERT INTO `t_posts` (`idPosts`, `title`, `content`, `fk_User`) VALUES
+INSERT INTO `t_posts` (`idPost`, `title`, `content`, `fk_User`) VALUES
 (1, 'Publication test 1', 'Ceci est une publication de test, elle servira à tester notre réseaux social lors de son développement. ', 1),
 (2, 'Test publication 2', 'Ceci est une deuxième publication de test, toujours pour tester l\'application lors de son développement', 2);
 
@@ -76,7 +77,7 @@ CREATE TABLE `t_user` (
   `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `isAdmin` tinyint(1) DEFAULT NULL
+  `isAdmin` tinyint(1) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -85,7 +86,9 @@ CREATE TABLE `t_user` (
 
 INSERT INTO `t_user` (`idUser`, `username`, `password`, `email`, `isAdmin`) VALUES
 (1, 'Alessio', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'alessio.lopardo@eduvaud.ch', 0),
-(2, 'Admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin@example.com', 1);
+(2, 'Admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin@example.com', 1),
+(3, 'Kent1', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'quentin.metroz@eduvaud.ch', 0),
+(4, 'Gorfort', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'thibaud.racine@eduvaud.ch', 0);
 
 --
 -- Index pour les tables déchargées
@@ -95,15 +98,15 @@ INSERT INTO `t_user` (`idUser`, `username`, `password`, `email`, `isAdmin`) VALU
 -- Index pour la table `t_comments`
 --
 ALTER TABLE `t_comments`
-  ADD PRIMARY KEY (`idComments`),
+  ADD PRIMARY KEY (`idComment`),
   ADD KEY `fk_User` (`fk_User`),
-  ADD KEY `fk_Posts` (`fk_Posts`);
+  ADD KEY `fk_Posts` (`fk_Post`);
 
 --
 -- Index pour la table `t_posts`
 --
 ALTER TABLE `t_posts`
-  ADD PRIMARY KEY (`idPosts`),
+  ADD PRIMARY KEY (`idPost`),
   ADD KEY `fk_User` (`fk_User`);
 
 --
@@ -120,19 +123,19 @@ ALTER TABLE `t_user`
 -- AUTO_INCREMENT pour la table `t_comments`
 --
 ALTER TABLE `t_comments`
-  MODIFY `idComments` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idComment` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `t_posts`
 --
 ALTER TABLE `t_posts`
-  MODIFY `idPosts` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPost` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `t_user`
 --
 ALTER TABLE `t_user`
-  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -143,7 +146,7 @@ ALTER TABLE `t_user`
 --
 ALTER TABLE `t_comments`
   ADD CONSTRAINT `t_comments_ibfk_1` FOREIGN KEY (`fk_User`) REFERENCES `t_user` (`idUser`),
-  ADD CONSTRAINT `t_comments_ibfk_2` FOREIGN KEY (`fk_Posts`) REFERENCES `t_posts` (`idPosts`);
+  ADD CONSTRAINT `t_comments_ibfk_2` FOREIGN KEY (`fk_Post`) REFERENCES `t_posts` (`idPost`);
 
 --
 -- Contraintes pour la table `t_posts`
