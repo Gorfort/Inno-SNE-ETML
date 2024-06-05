@@ -37,7 +37,6 @@ const auth = (req, res, next) => {
         } else {
           // Passage des information du decoded token à req.user
           req.user = decodedToken;
-          console.log(decodedToken);
           // Passage au middleware suivant si le jeton est valide et les userId correspondent
           next();
         }

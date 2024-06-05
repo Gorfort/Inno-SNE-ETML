@@ -35,8 +35,9 @@ adminRouter.get("/users", auth, requireRole(1), (req, res) => {
       const message = "Aucun utilisateur trouvé.";
       return res.status(404).json({ message }); // Utilisation de `return` pour s'assurer que la fonction s'arrête ici
     } else {
+      const message = "Les utilisateurs ont bien été récupérer";
       // Si des utilisateurs sont trouvés, renvoyer les données en JSON
-      res.json({ result });
+      res.json({ message, data: result });
     }
   });
 });

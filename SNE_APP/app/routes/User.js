@@ -19,7 +19,7 @@ userRouter.get("/", auth, (req, res) => {
       return res.status(401).json({ message: "Identifiants invalides." });
     } else {
       const message = "L'utilisateur à bien été récupéré";
-      res.json({ data: user });
+      res.json({ message, data: user });
     }
   });
 });

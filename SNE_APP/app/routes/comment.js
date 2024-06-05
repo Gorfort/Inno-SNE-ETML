@@ -6,24 +6,27 @@ const commentRouter = express.Router();
 
 // Route pour récupérer tous les commentaires
 commentRouter.get("/", auth, (req, res) => {
-  const query = "SELECT * FROM t_comments";
+  const query =
+    "SELECT idComment, comment, t_user.username, t_posts.title as Post_title, t_posts.content as post_content FROM t_comments JOIN t_posts ON t_posts.idPost = t_comments.fk_Post JOIN t_user ON t_user.idUser = t_comments.fk_User ";
   connection.query(query, (error, result) => {
     if (error) {
       const message = "Erreur du serveur interne, veuillez ressayer plus tard";
-      res.status(500).json({ message });
+      console.log(error);
+      return res.status(500).json({ message });
     }
     if (result.length === 0) {
       const message = "Aucun commentaire trouvé";
-      res.status(404).json({ message });
+      return res.status(404).json({ message });
     } else {
-      res.json({ result });
+      return res.json({ result });
     }
   });
 });
 
 // Route pour récupérer un commentaire selon son ID
 commentRouter.get("/:id", auth, (req, res) => {
-  const query = "SELECT * FROM t_comments WHERE idComment = ?";
+  const query =
+    "SELECT idComment, comment, t_user.username, t_posts.title as Post_title, t_posts.content as post_content FROM t_comments JOIN t_posts ON t_posts.idPost = t_comments.fk_Post JOIN t_user ON t_user.idUser = t_comments.fk_User WHERE idComment = ?";
   connection.query(query, [req.params.id], (error, result) => {
     if (error) {
       const message = "Erreur du serveur interne, veuillez ressayer plus tard.";
