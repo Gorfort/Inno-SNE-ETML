@@ -30,16 +30,16 @@ class Post:
 
 
     def get_posts(self):
-        req = get('http://localhost:3000/api/products')
+        req = get('http://nodejs:3000/api/products')
         print("Les posts ont bien été récupéré")
         return req.json()['data']
     
     def put_post(self, id, data):
-        put(url='http://localhost:3000/api/comments/' + id, data=data)
+        put(url='http://nodejs:3000/api/comments/' + id, data=data)
         print("Le post a bien été modifié")
 
     def delete_post(self, id):
-        delete('http://localhost:3000/api/comments/' + id)
+        delete('http://nodejs:3000/api/comments/' + id)
         print("Le post à bien été retiré")
 
 post = Post()
