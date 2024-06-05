@@ -38,6 +38,7 @@ python --version
 git clone https://github.com/Gorfort/Inno-SNE-ETML.git
 cd Inno-SNE-ETML
 git checkout QMZ_IA
+cd algo
 pip install -r requirements.txt --user -U
 ```
 
