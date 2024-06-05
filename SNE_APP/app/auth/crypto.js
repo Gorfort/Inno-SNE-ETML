@@ -14,4 +14,4 @@ const compareHashPassword = (password, hashedPassword) => {
   return false;
 };
 
-export default compareHashPassword;
+export { compareHashPassword, hashPassword };

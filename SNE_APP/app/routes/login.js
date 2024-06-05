@@ -1,7 +1,7 @@
 // Importation des dépendances nécessaires
 import express from "express";
 import connection from "../mysql/MySql.js"; // Connexion à la base de données MySQL
-import compareHashPassword from "../auth/crypto.js"; // Fonction pour comparer les mots de passe hashés
+import { compareHashPassword } from "../auth/crypto.js"; // Fonction pour comparer les mots de passe hashés
 import jwt from "jsonwebtoken"; // Pour générer des tokens JWT
 import privateKey from "../auth/private_key.js"; // Clé privée pour signer le JWT
 

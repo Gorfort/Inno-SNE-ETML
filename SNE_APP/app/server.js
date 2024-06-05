@@ -57,5 +57,9 @@ app.use("/user", userRouter);
 import loginRouter from "./routes/login.js";
 app.use("/login", loginRouter);
 
+// Route qui permet de se login
+import signinRouter from "./routes/signin.js";
+app.use("/signin", signinRouter);
+
 // Démarrage du serveur en HTTP
 app.listen(443);
