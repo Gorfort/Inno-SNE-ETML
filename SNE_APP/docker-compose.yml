@@ -63,7 +63,7 @@ services:
     environment:
       - NODE_ENV=development
     volumes:
-      - ./WebShopFrontEnd:/home/vue/app
+      - ./SNE_FRONT:/home/vue/app
       - /home/vue/app/node_modules
     ports:
       - "5173:5173"

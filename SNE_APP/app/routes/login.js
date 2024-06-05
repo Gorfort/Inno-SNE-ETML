@@ -34,6 +34,7 @@ loginRouter.post("/", (req, res) => {
     }
 
     const user = users[0];
+    console.log(user);
     const hashedPassword = user.password;
 
     // Comparaison du mot de passe envoyé avec le mot de passe hashé stocké
@@ -41,7 +42,7 @@ loginRouter.post("/", (req, res) => {
     if (isPasswordCorrect) {
       // Si les mots de passe correspondent, générer un token JWT
       const token = jwt.sign(
-        { userId: user.id, userRole: user.role },
+        { userId: user.idUser, userIsAdmin: user.isAdmin },
         privateKey,
         {
           expiresIn: "1y", // Le token expire en 1 an

@@ -41,10 +41,6 @@ connection.connect((error) => {
 import postRouter from "./routes/post.js";
 app.use("/post", postRouter);
 
-// Routes pour les Admins
-import adminRouter from "./routes/admin.js";
-app.use("/admin", adminRouter);
-
 // Routes pour les commentaires
 import commentRouter from "./routes/comment.js";
 app.use("/comment", commentRouter);
@@ -61,5 +57,8 @@ app.use("/login", loginRouter);
 import signinRouter from "./routes/signin.js";
 app.use("/signin", signinRouter);
 
+// Routes pour les Admins
+import adminRouter from "./routes/admin.js";
+app.use("/admin", adminRouter);
 // Démarrage du serveur en HTTP
 app.listen(443);
