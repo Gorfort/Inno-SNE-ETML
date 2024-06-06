@@ -15,7 +15,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: db_user
       MYSQL_PASSWORD: db_user_pass
-      MYSQL_DATABASE: db_WebStore
+      MYSQL_DATABASE: db_esn_social_network
     restart: always
     ports:
       - "6033:3306"
