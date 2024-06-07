@@ -21,15 +21,23 @@ But before try to do this command you have to install git and python :
 
 #### Python
 
-* For installing python go to this [url](https://www.python.org/downloads/).
-* Download the correct installer.
-* Follow the installer.
+* Go to the microsoft store
+* In the search bar type Python 3.12
+* Click on the first result
+* Click on the download button
 
 #### Git
 
 * For installing git go to this [url](https://git-scm.com/)
 * Click on the button in the screen
 * Follow the installer
+
+#### Setup the environment
+
+```sh
+python3 -m venv .venv
+.venv/Scripts/activate.bat
+```
 
 #### Installation of the package
 
@@ -41,21 +49,14 @@ git checkout QMZ_IA
 pip install -r requirements.txt --user -U
 ```
 
-#### Setup the environment
-
-```sh
-python3 -m venv .venv
-source .venv/Scripts/activate
-```
-
-When you have finished your work launch this command :
-
-```sh
-deactivate
-```
-
 #### Launch the script
 
 ```sh
 python3 script.py
+```
+
+#### When you have finished your work launch this command :
+
+```sh
+deactivate
 ```

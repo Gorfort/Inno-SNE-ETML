@@ -19,7 +19,7 @@ class Comment:
         for p in self.new_comments:
             current_content = p['comment']
             for key in secret_word:
-                if key in p:
+                if key in p.split(' '):
                     p['comment'] = p['comment'].replace(key, secret_word[key])
 
             if current_content != p['comment']:
@@ -60,11 +60,18 @@ class Post:
         for p in self.new_posts:
             current_content = p['content']
             for key in secret_word:
-                if key in p:
+                if key in current_content.split(' '):
                     p['content'] = p['content'].replace(key, secret_word[key])
 
             if current_content != p['content']:
-                self.put_post(p['idPost'], p)
+                self.put_post(p['idPost'], { 'comment': p['comment'], 'fk_User': p['fk_User'], 'fk_Post': p['fk_Post'] } )
+
+            current_content = p['title']
+            for key in current_content.split(' '):
+                p['title'] = p['title'].replace(key, secret_word[key])
+
+            if current_content != p['title']:
+                self.put_post(p['idPost'], { 'title': p['title'], 'content': p['content'], 'fkUser': p['fkUser'] } )
 
     def check_post(self):
         if self.number_post < len(self.posts):
