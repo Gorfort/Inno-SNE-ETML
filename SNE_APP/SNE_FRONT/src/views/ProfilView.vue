@@ -8,6 +8,7 @@ try {
   axios.getUser().then((response) => {
     users.value = response.data.data
     user.value = users.value[0]
+    console.log(user.value)
   })
 } catch (error) {
   console.log(error)
@@ -21,8 +22,4 @@ try {
   </div>
 </template>
 
-<style>
-.about {
-  color: white;
-}
-</style>
+<style></style>
