@@ -69,7 +69,7 @@ class Post:
                     p['title'] = p['title'].replace(key, secret_word[key])
 
             if current_content != p['content'] or current_title != p['title']:
-                self.put_post(p['idPost'], { 'title': p['title'], 'content': p['content'], 'fkUser': p['fkUser'] } )
+                self.put_post(p['idPost'], { 'title': p['title'], 'content': p['content'], 'fk_User': p['fk_User'] } )
 
     def check_post(self):
         if self.number_post < len(self.posts):
