@@ -1,6 +1,9 @@
 from json import load
-from requests import get, put
+from requests import get, post, put
 from time import sleep
+
+def get_token(username, password):
+    return post('http://localhost:443/login', json={ 'username': username, 'password': password }).json()['token']
 
 class Comment:
     def __init__(self):
@@ -83,16 +86,16 @@ class Post:
         put(url='http://localhost:443/comment/' + str(id), data=data, headers=custom_headers)
         print("Le post a bien été modifié")
 
-post = Post()
+user_post = Post()
 comment = Comment()
 
-custom_headers = {'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJJc0FkbWluIjoxLCJpYXQiOjE3MTc2NzQ3MzcsImV4cCI6MTc0OTIzMjMzN30.MYdY2xl0l88n8zU5wqdK0B8f6uKK8mx1eLk55E9hPdA'}
+custom_headers = {'Authorization': 'Bearer ' + get_token('Admin', 'password')}
 
 while True:
-    post.posts = post.get_posts()
+    user_post.posts = user_post.get_posts()
     comment.comments = comment.get_comments()
 
-    post.check_post()
+    user_post.check_post()
     comment.check_comment()
 
     sleep(2)
