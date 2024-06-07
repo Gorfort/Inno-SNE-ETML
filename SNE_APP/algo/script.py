@@ -1,9 +1,20 @@
-from json import load
+from json import load, dump
 from requests import get, post, put
 from time import sleep
 
 def get_token(username, password):
     return post('http://localhost:443/login', json={ 'username': username, 'password': password }).json()['token']
+
+def initialize_json():
+    with open('data.json', 'r', encoding='utf-8') as file:
+        data = load(file)
+
+    capitalized_data = {key.capitalize(): value.capitalize() for key, value in data.items()}
+
+    extended_data = {**data, **capitalized_data}
+
+    with open('data.json', 'w', encoding='utf-8') as f:
+        dump(extended_data, f, ensure_ascii=False, indent=4)
 
 class Comment:
     def __init__(self):
@@ -23,7 +34,7 @@ class Comment:
                     p['comment'] = p['comment'].replace(key, secret_word[key])
 
             if current_content != p['comment']:
-                self.put_comment(p['idComment'], p)
+                self.put_comment(p['idComment'], { 'comment': p['comment'] } )
 
     def check_comment(self):
         if self.number_comment < len(self.comments):
@@ -96,6 +107,8 @@ comment = Comment()
 
 custom_headers = {'Authorization': 'Bearer ' + get_token('Admin', 'password')}
 
+initialize_json()
+
 while True:
     user_post.posts = user_post.get_posts()
     comment.comments = comment.get_comments()
@@ -105,3 +118,4 @@ while True:
 
     sleep(2)
     print("\n")
+
