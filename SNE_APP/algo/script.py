@@ -19,7 +19,7 @@ class Comment:
         for p in self.new_comments:
             current_content = p['comment']
             for key in secret_word:
-                if key in p.split(' '):
+                if key in current_content.split(' '):
                     p['comment'] = p['comment'].replace(key, secret_word[key])
 
             if current_content != p['comment']:
@@ -42,7 +42,7 @@ class Comment:
         return req.json()['result']
     
     def put_comment(self, id, data):
-        put(url='http://localhost:443/comment/' + str(id), data=data, headers=custom_headers)
+        put(url='http://localhost:443/comment/' + str(id), json=data, headers=custom_headers)
         print("Le commentaire a bien été modifié")
 
 
@@ -69,7 +69,7 @@ class Post:
                     p['title'] = p['title'].replace(key, secret_word[key])
 
             if current_content != p['content'] or current_title != p['title']:
-                self.put_post(p['idPost'], { 'title': p['title'], 'content': p['content'], 'fk_User': p['fk_User'] } )
+                self.put_post(p['idPost'], { 'title': p['title'], 'content': p['content'] } )
 
     def check_post(self):
         if self.number_post < len(self.posts):
@@ -88,7 +88,7 @@ class Post:
         return req.json()['data']
     
     def put_post(self, id, data):
-        put(url='http://localhost:443/comment/' + str(id), data=data, headers=custom_headers)
+        put(url='http://localhost:443/post/' + str(id), json=data, headers=custom_headers)
         print("Le post a bien été modifié")
 
 user_post = Post()
