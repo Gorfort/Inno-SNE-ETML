@@ -7,8 +7,8 @@ const notAllowed = ref(false)
 onMounted(async () => {
   try {
     const response = await axios.getAdmin()
-    users.value = response.data.result
-    console.log(users.value)
+    users.value = response.data.data
+    console.log(response)
   } catch (error) {
     console.log(error)
     notAllowed.value = true
@@ -17,7 +17,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <p class="notAllowed" v-show="notAllowed">You're note allowed</p>
+  <p class="notAllowed" v-show="notAllowed">You're not allowed</p>
   <div v-for="element in users" :key="element.id" class="users">
     <h1>{{ element.username }}</h1>
     <p>{{ element.email }}</p>
@@ -25,10 +25,6 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.users {
-  color: white;
-}
-
 .notAllowed {
   color: red;
 }

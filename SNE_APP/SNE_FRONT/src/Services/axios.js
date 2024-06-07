@@ -25,7 +25,7 @@ export default {
   },
   getAdmin() {
     const token = sessionStorage.getItem('token')
-    return api.get('/user/admin', {
+    return api.get('/admin/users', {
       headers: {
         Authorization: `Bearer ${token}`
       }
