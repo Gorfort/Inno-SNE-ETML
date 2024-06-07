@@ -69,5 +69,17 @@ services:
       - "5173:5173"
     command: "npm run dev"
 
+  python:
+    build:
+      context: ./algo
+      dockerfile: python.dockerfile
+    container_name: python_container
+    environment:
+      - PYTHONBUFFERED=1
+    volumes:
+      - ./algo:/app
+    working_dir: /app
+    command: python3 script.py     
+    
 volumes:
   dbdata:

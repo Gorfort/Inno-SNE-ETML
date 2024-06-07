@@ -3,7 +3,11 @@ from requests import get, post, put
 from time import sleep
 
 def get_token(username, password):
-    return post('http://localhost:443/login', json={ 'username': username, 'password': password }).json()['token']
+    res = post('http://nodejs:443/login', json={ 'username': username, 'password': password })
+    print(res)
+    token = res.json()['token']
+    print(token)
+    return token
 
 def initialize_json():
     with open('data.json', 'r', encoding='utf-8') as file:
@@ -48,12 +52,12 @@ class Comment:
 
 
     def get_comments(self):
-        req = get('http://localhost:443/comment', headers=custom_headers)
+        req = get('http://nodejs:443/comment', headers=custom_headers)
         print("Les commentaires ont bien été récupéré")
         return req.json()['result']
     
     def put_comment(self, id, data):
-        put(url='http://localhost:443/comment/' + str(id), json=data, headers=custom_headers)
+        put(url='http://nodejs:443/comment/' + str(id), json=data, headers=custom_headers)
         print("Le commentaire a bien été modifié")
 
 
@@ -94,12 +98,12 @@ class Post:
 
 
     def get_posts(self):
-        req = get('http://localhost:443/post', headers=custom_headers)
+        req = get('http://nodejs:443/post', headers=custom_headers)
         print("Les posts ont bien été récupéré")
         return req.json()['data']
     
     def put_post(self, id, data):
-        put(url='http://localhost:443/post/' + str(id), json=data, headers=custom_headers)
+        put(url='http://nodejs:443/post/' + str(id), json=data, headers=custom_headers)
         print("Le post a bien été modifié")
 
 user_post = Post()
