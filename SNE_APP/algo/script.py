@@ -63,15 +63,12 @@ class Post:
                 if key in current_content.split(' '):
                     p['content'] = p['content'].replace(key, secret_word[key])
 
-            if current_content != p['content']:
-                self.put_post(p['idPost'], { 'comment': p['comment'], 'fk_User': p['fk_User'], 'fk_Post': p['fk_Post'] } )
-
-            current_content = p['title']
+            current_title = p['title']
             for key in secret_word:
-                if key in current_content.split(' '):
+                if key in current_title.split(' '):
                     p['title'] = p['title'].replace(key, secret_word[key])
 
-            if current_content != p['title']:
+            if current_content != p['content'] or current_title != p['title']:
                 self.put_post(p['idPost'], { 'title': p['title'], 'content': p['content'], 'fkUser': p['fkUser'] } )
 
     def check_post(self):
