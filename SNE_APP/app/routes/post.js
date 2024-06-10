@@ -5,7 +5,7 @@ import connection from "../mysql/MySql.js";
 const postRouter = express.Router();
 
 // Route qui permet de récupérer toutes les publications
-postRouter.get("/", auth, (req, res) => {
+postRouter.get("/", (req, res) => {
   // Query MySQL pour récupérer tous les posts
   const query =
     "SELECT idPost, title, content, t_user.username FROM t_posts JOIN t_user ON t_user.idUser = t_posts.fk_User";

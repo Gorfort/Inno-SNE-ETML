@@ -23,9 +23,34 @@ export default {
       }
     })
   },
-  getAdmin() {
+  getPosts() {
     const token = sessionStorage.getItem('token')
-    return api.get('/admin/users', {
+    return api.get('/post', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  },
+  async getCommentsByPost(id) {
+    const token = sessionStorage.getItem('token')
+    return await api.get(`post/${id}/comments`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  },
+  getPost(id) {
+    const token = sessionStorage.getItem('token')
+    return api.get('/post/' + id, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  },
+  addComment(comment) {
+    const token = sessionStorage.getItem('token')
+
+    return api.post('/comment', comment, {
       headers: {
         Authorization: `Bearer ${token}`
       }

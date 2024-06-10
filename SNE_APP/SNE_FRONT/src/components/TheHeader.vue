@@ -6,6 +6,7 @@ import { RouterLink } from 'vue-router'
   <div>
     <header>
       <nav>
+        <RouterLink :to="{ name: 'home' }">Home</RouterLink>
         <RouterLink :to="{ name: 'login' }">Login</RouterLink>
         <RouterLink :to="{ name: 'profil' }">Profil</RouterLink>
         <RouterLink :to="{ name: 'admin' }">Admin</RouterLink>
