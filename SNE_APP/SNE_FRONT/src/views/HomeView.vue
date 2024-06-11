@@ -27,8 +27,28 @@ onMounted(async () => {
 #main {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: #121212; /* Dark background for the main container */
 }
+
 .post {
-  width: 500px;
+  width: 100%;
+  max-width: 600px;
+  margin: 1rem 0;  /* Margin to separate posts */
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: #1e1e1e; /* Dark background for the post */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Darker shadow */
+  transition: box-shadow 0.3s ease;
+  color: #e0e0e0; /* Light text color */
+}
+
+.post + .post {
+  margin-top: 1.5rem; /* Additional margin to ensure clear separation */
+}
+
+.post:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7); /* Darker shadow on hover */
 }
 </style>

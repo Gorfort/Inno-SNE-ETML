@@ -41,5 +41,61 @@ async function onSubmit() {
     </form>
   </div>
 </template>
+<style scoped>
+body {
+  background-color: #121212; /* Dark background for the body */
+  color: #e0e0e0; /* Light text color */
+  font-family: Arial, sans-serif;
+}
 
-<style scoped></style>
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: #1e1e1e; /* Dark background for the form */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+form input[type="text"],
+form textarea {
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #333;
+  border-radius: 4px;
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  font-size: 1rem;
+}
+
+form textarea {
+  resize: vertical; /* Allow vertical resizing */
+  height: 150px; /* Default height for the textarea */
+}
+
+form input[type="text"]:focus,
+form textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+form button {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+</style>
+
