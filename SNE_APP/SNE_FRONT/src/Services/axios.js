@@ -92,10 +92,29 @@ export default {
     })
   },
 
+  /**
+   *
+   * @param {*} post
+   * @returns
+   */
   addPost(post) {
     const token = sessionStorage.getItem('token')
 
     return api.post('/post', post, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  /**
+   *
+   * @returns
+   */
+  getAdmin() {
+    const token = sessionStorage.getItem('token')
+
+    return api.get('/admin/users', {
       headers: {
         Authorization: `Bearer ${token}`
       }

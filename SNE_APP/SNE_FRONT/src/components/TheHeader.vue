@@ -7,6 +7,7 @@ import { RouterLink } from 'vue-router'
     <header>
       <nav>
         <RouterLink :to="{ name: 'home' }">Home</RouterLink>
+        <RouterLink :to="{ name: 'add-post-view' }">Post</RouterLink>
         <RouterLink :to="{ name: 'login' }">Login</RouterLink>
         <RouterLink :to="{ name: 'profil' }">Profil</RouterLink>
         <RouterLink :to="{ name: 'admin' }">Admin</RouterLink>
@@ -20,11 +21,10 @@ header {
   line-height: 1.5;
   max-height: 100vh;
   display: flex;
+  align-items: center;
 }
 
 nav {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   width: 100%;
   font-size: 12px;

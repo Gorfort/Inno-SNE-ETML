@@ -1,13 +1,27 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from '@/Services/axios'
 import router from '@/router'
 
 const post = ref({})
 
+// Permet de vérifié si l'utilisateur est bien connecté
+onMounted(async () => {
+  const isConnected = () => {
+    return !!sessionStorage.getItem('token')
+  }
+
+  // Si l'utilisateur n'est pas connecter il est renvoyer à la page de connexion
+  if (!isConnected()) {
+    await alert("You're not connected, please login")
+    router.push({ name: 'login' })
+  }
+})
+
 async function onSubmit() {
+  console.log(post.value)
   await axios
-    .addPost(post)
+    .addPost(post.value)
     .then((response) => {
       console.log(response)
       router.push({ name: 'home' })

@@ -5,14 +5,15 @@ import axios from '@/Services/axios'
 const users = ref([])
 const notAllowed = ref(false)
 onMounted(async () => {
-  try {
-    const response = await axios.getAdmin()
-    users.value = response.data.data
-    console.log(response)
-  } catch (error) {
-    console.log(error)
-    notAllowed.value = true
-  }
+  await axios
+    .getAdmin()
+    .then((response) => {
+      users.value = response.data.data
+    })
+    .catch((error) => {
+      console.log(error)
+      notAllowed.value = true
+    })
 })
 </script>
 

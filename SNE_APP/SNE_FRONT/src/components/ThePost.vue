@@ -8,8 +8,18 @@ defineProps({
   }
 })
 
-function commentClicked(idPost) {
-  router.push({ name: 'post-view', params: { id: idPost } })
+async function commentClicked(idPost) {
+  const isConnected = () => {
+    return !!sessionStorage.getItem('token')
+  }
+
+  // Si l'utilisateur n'est pas connecter il est renvoyer à la page de connexion
+  if (!isConnected()) {
+    await alert("You're not connected, please login")
+    router.push({ name: 'login' })
+  } else {
+    router.push({ name: 'post-view', params: { id: idPost } })
+  }
 }
 </script>
 
