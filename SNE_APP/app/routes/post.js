@@ -8,7 +8,7 @@ const postRouter = express.Router();
 postRouter.get("/", (req, res) => {
   // Query MySQL pour récupérer tous les posts
   const query =
-    "SELECT idPost, title, content, t_user.username FROM t_posts JOIN t_user ON t_user.idUser = t_posts.fk_User";
+    "SELECT * FROM t_posts JOIN t_user ON t_user.idUser = t_posts.fk_User";
 
   // Récupérer tous les posts grâce à la connexion avec la DB
   connection.query(query, (error, result) => {
@@ -30,7 +30,7 @@ postRouter.get("/", (req, res) => {
 // Route qui permet de récupérer une publication selon son id
 postRouter.get("/:id", auth, (req, res) => {
   const query =
-    "SELECT idPost, title, content, t_user.username FROM t_posts JOIN t_user ON t_user.idUser = t_posts.fk_User WHERE idPost = ?";
+    "SELECT * FROM t_posts JOIN t_user ON t_user.idUser = t_posts.fk_User WHERE idPost = ?";
   connection.query(query, [req.params.id], (error, result) => {
     if (error) {
       const message = "Erreur du serveur interne, veuillez ressayer plus tard.";
@@ -49,7 +49,7 @@ postRouter.get("/:id", auth, (req, res) => {
 // Routess qui permet de récupérer tous les commentaire selon la publication
 postRouter.get("/:id/comments", auth, (req, res) => {
   const query =
-    "SELECT t_comments.idComment, t_comments.comment, t_user.username FROM t_comments JOIN t_user ON t_comments.fk_User = t_user.idUser WHERE t_comments.fk_Post = ?";
+    "SELECT * FROM t_comments JOIN t_user ON t_comments.fk_User = t_user.idUser WHERE t_comments.fk_Post = ?";
 
   connection.query(query, [req.params.id], (error, result) => {
     if (error) {

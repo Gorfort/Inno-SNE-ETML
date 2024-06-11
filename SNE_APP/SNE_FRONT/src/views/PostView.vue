@@ -9,6 +9,7 @@ const comments = ref([])
 const commentContent = ref()
 const comment = ref({})
 
+let noComments = false
 const props = defineProps({
   id: {
     required: true
@@ -32,6 +33,7 @@ onMounted(async () => {
       comments.value = response.data.result
     })
     .catch((error) => {
+      noComments = true
       console.log(error)
     })
 })
@@ -62,14 +64,15 @@ async function onSubmit() {
       <p>_____________________________________</p>
     </div>
     <div id="comments">
-      <form @submit.prevent="onSubmit">
+      <form @submit="onSubmit">
         <input type="text" placeholder="Ajouter un commentaire" v-model="commentContent" />
         <button type="submit" value="Submit">Envoyer</button>
       </form>
+      <div v-show="noComments">Aucun commentaire</div>
 
       <div class="comment" v-for="comment in comments" :key="comment.idComment">
-        <p>{{ comment.comment }}</p>
         <p>{{ comment.username }}</p>
+        <p>{{ comment.comment }}</p>
       </div>
     </div>
   </div>
