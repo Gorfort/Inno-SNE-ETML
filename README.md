@@ -13,7 +13,68 @@ Project not yet finished.
 
 ## How to build the project
 
-### Installing the environment for python
+### Installing the environment for python in Ubuntu
+
+To build and execute the python do this command :
+
+But before try to do this command you have to install git and python :
+
+#### Python :
+
+Execute this command to install Python :
+
+```sh
+sudo apt update
+sudo apt upgrade
+sudo apt install python3 -y
+python --version
+```
+
+#### Git :
+
+Execute this command to install Git :
+
+```sh
+sudo apt update
+sudo apt upgrade
+sudo apt install git -y
+git --version
+```
+
+#### Docker :
+
+Execute this command to install Docker :
+
+```sh
+sudo apt update
+sudo apt upgrade
+sudo apt snap docker
+sudo apt install docker-compose -y
+```
+
+#### Instalation of the package for the venv environment :
+
+Execute this command to install Python venv:
+
+```sh
+sudo apt update
+sudo apt upgrade
+sudo apt install python3.10-venv -y
+```
+
+#### Build and installation the project
+
+```sh
+git clone https://github.com/Gorfort/Inno-SNE-ETML.git
+cd Inno-SNE-ETML
+git checkout QMZ_Algo-IA
+cd SNE_APP/algo
+docker-compose up -d --build
+pip install -r requirements.txt
+python3 script.py
+```
+
+### Installing the environment for python in Windows
 
 To build and execute the python do this command :
 
