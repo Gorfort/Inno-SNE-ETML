@@ -136,6 +136,18 @@ cd algo
 pip install -r requirements.txt
 ```
 
+#### Chargé le dump dans la base de données
+
+Vous allez dans l'application docker trouver le containeur phpmyadmin et cliquer sur l'icône pour ouvrir le navigateur
+
+Dans l'onglet Importer, appuyez sur le bouton Parcourir et mettez le dump dans le dossier racine db
+
+#### Préparer le Node.js
+
+Aller au dossier depuis la racine ./SNE_APP/app
+Ouvrir le fichier server.js. Enlever un point-virgule et remttez le.
+
+
 #### Launch the script
 
 ```sh
