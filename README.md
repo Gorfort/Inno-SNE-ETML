@@ -27,6 +27,7 @@ Execute this command to install Python :
 sudo apt update
 sudo apt upgrade
 sudo apt install python3 -y
+sudo apt install python3-pip -y
 python --version
 ```
 
@@ -50,19 +51,9 @@ sudo apt update
 sudo apt upgrade
 sudo apt snap docker
 sudo apt install docker-compose -y
-```
+``` 
 
-#### Instalation of the package for the venv environment :
-
-Execute this command to install Python venv:
-
-```sh
-sudo apt update
-sudo apt upgrade
-sudo apt install python3.10-venv -y
-```
-
-#### Build and installation the project
+#### Build the project
 
 ```sh
 git clone https://github.com/Gorfort/Inno-SNE-ETML.git
@@ -71,7 +62,49 @@ git checkout QMZ_Algo-IA
 cd SNE_APP/algo
 docker-compose up -d --build
 pip install -r requirements.txt
-python3 script.py
+```
+
+#### Chargé le dump dans la base de données
+
+```sh
+open http://localhost:8081
+```
+
+Dans l'onglet Importer, appuyez sur le bouton Parcourir et mettez le dump dans le dossier racine db
+
+#### Préparer le Node.js
+
+Aller au dossier depuis la racine ./SNE_APP/app
+Ouvrir le fichier server.js. Enlever un point-virgule et remttez le.
+
+#### Lancer le script
+
+```sh
+python3 ../algo/script.py
+```
+
+C'est bon tout est fini
+
+#### Erreur n°1
+
+Si l'erreur intervient sur le docker-compsoe voici quelque commande pour essaer de le reglé
+
+```sh
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+```sh
+sudo ls -l /var/run/docker.sock
+
+sudo chown root:docker /var/run/docker.sock
+sudo chmod 660 /var/run/docker.sock
+```
+
+Et ensuite redémmarer docker
+
+```sh
+sudo systemctl restart docker
 ```
 
 ### Installing the environment for python in Windows
