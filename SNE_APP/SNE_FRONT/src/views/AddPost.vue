@@ -10,11 +10,16 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import axios from '@/Services/axios'
 import router from '@/router'
 
 const post = ref({})
+
+// Set document title when component is mounted
+onMounted(() => {
+  document.title = 'ESN - Add Post'
+})
 
 // Check if the user is connected
 onMounted(async () => {
@@ -55,11 +60,13 @@ form {
   flex-direction: column;
   width: 100%;
   max-width: 600px;
+  min-width: 600px;
   margin: auto;
   padding: 2rem;
   border-radius: 8px;
-  background-color: #cccccc;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 15px;
 }
 
 form input[type="text"],
@@ -68,7 +75,7 @@ form textarea {
   margin-bottom: 1rem;
   border: 1px solid #333;
   border-radius: 4px;
-  background-color: #b4b4b4;
+  background-color: #eeeeee;
   color: #3d3d3d;
   font-size: 1rem;
 }

@@ -145,7 +145,7 @@ body {
 }
 
 #post {
-  background-color: #cccccc; /* Dark background for the post */
+  background-color: #ffffff; /* Dark background for the post */
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -190,7 +190,7 @@ form {
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;
-  background-color: #cccccc;
+  background-color: #ffffff;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -199,9 +199,9 @@ form {
 form input[type="text"] {
   padding: 0.75rem;
   margin-bottom: 1rem;
-  border: 1px solid #333;
+  border: 1px solid #969696;
   border-radius: 4px;
-  background-color: #b9b9b9;
+  background-color: #dbdbdb;
   color: #000000;
   font-size: 1rem;
 }
@@ -222,7 +222,7 @@ form button:hover {
 }
 
 .comment {
-  background-color: #cccccc;
+  background-color: #ffffff;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -262,7 +262,7 @@ form button:hover {
 }
 
 .reply-form {
-  background-color: #cccccc; /* Slightly lighter background for the reply form */
+  background-color: #ffffff; /* Slightly lighter background for the reply form */
   padding: 1rem;
   border-radius: 8px;
   margin-top: 0.5rem;
@@ -284,12 +284,12 @@ form button:hover {
 }
 
 .replies .reply {
-  background-color: #cccccc; /* Lighter gray background for replies */
+  background-color: #ffffff; /* Lighter gray background for replies */
   margin-top: 0.5rem;
 }
 
 .reply-content {
-  background-color: #cccccc; /* Different color for replies */
+  background-color: #e9e9e9; /* Different color for replies */
   padding: 0.75rem;
   border-radius: 4px;
 }

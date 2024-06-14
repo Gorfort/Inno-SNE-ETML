@@ -5,6 +5,7 @@ import axios from '@/Services/axios'
 const user = ref({})
 let Successful = ref(false)
 let failed = ref(false)
+
 async function OnSubmit() {
   try {
     await axios.login(user.value)
@@ -16,11 +17,14 @@ async function OnSubmit() {
     console.log(error)
   }
 }
+
+// Set the page title dynamically
+document.title = 'ESN - Login';
 </script>
 
 <template>
   <div>
-    <h1 style="text-align: center;">Login</h1> <!-- Center-align the h1 heading -->
+    <h1 style="text-align: center;">Login</h1>
     <form @submit.prevent="OnSubmit">
       <input type="text" placeholder="Username" v-model="user.username" />
       <input type="password" placeholder="Password" v-model="user.password" />
@@ -31,8 +35,6 @@ async function OnSubmit() {
   </div>
 </template>
 
-
-
 <style scoped>
 form {
   display: flex;
@@ -42,7 +44,8 @@ form {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #cccccc;
+  background-color: #ffffff;
+  margin-top: 15px;
 }
 
 input[type="text"],

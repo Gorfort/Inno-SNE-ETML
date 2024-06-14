@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import axios from '@/Services/axios'
 import ThePost from '@/components/ThePost.vue'
 
@@ -9,9 +9,17 @@ onMounted(async () => {
   try {
     const response = await axios.getPosts()
     posts.value = response.data.data
+
+    // Set document title
+    document.title = 'ESN - Home';
   } catch (error) {
     console.log(error)
   }
+})
+
+// Optional: Reset document title on component unmount
+onBeforeUnmount(() => {
+  document.title = 'Original Title'; // Replace with your original title
 })
 </script>
 
@@ -28,7 +36,7 @@ onMounted(async () => {
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  background-color: #ffffff;
+  background-color: #e4e4e4;
 }
 
 .post {
@@ -37,7 +45,7 @@ onMounted(async () => {
   margin-bottom: 1.5rem;
   padding: 1.5rem;
   border-radius: 8px;
-  background-color: #cccccc;
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s ease;
   color: #000000;

@@ -2,7 +2,7 @@
   <div>
     <header>
       <div class="logo" @click="goToHome">
-        <span>ESN</span>
+        <img src="../../../SNE_FRONT/src/images/Logo-Web.png" alt="ESN Logo">
       </div>
       <nav class="links">
         <RouterLink :to="{ name: 'home' }" class="nav-link">Home</RouterLink>
@@ -46,10 +46,14 @@ header {
 }
 
 .logo {
-  font-size: 2rem;
-  font-weight: bold;
   cursor: pointer; /* Add cursor pointer to indicate clickable */
   margin-bottom: 1rem; /* Add margin to the bottom of the logo */
+}
+
+.logo img {
+  width: 100%; /* Ensure the image takes up the full width of the container */
+  max-width: 100%;
+  height: auto; /* Maintain aspect ratio */
 }
 
 .links {
