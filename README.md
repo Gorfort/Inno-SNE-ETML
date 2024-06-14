@@ -133,20 +133,7 @@ git clone https://github.com/Gorfort/Inno-SNE-ETML.git
 cd Inno-SNE-ETML
 git checkout QMZ_IA
 cd algo
-pip install -r requirements.txt --user -U
-```
-
-#### Setup the environment
-
-```sh
-python3 -m venv .venv
-source .venv/Scripts/activate
-```
-
-When you have finished your work launch this command :
-
-```sh
-deactivate
+pip install -r requirements.txt
 ```
 
 #### Launch the script
