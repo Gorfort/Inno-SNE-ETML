@@ -1,53 +1,70 @@
-<script setup>
-import { RouterLink } from 'vue-router'
-</script>
-
 <template>
   <div>
     <header>
-      <nav>
-        <RouterLink :to="{ name: 'home' }">Home</RouterLink>
-        <RouterLink :to="{ name: 'add-post-view' }">Post</RouterLink>
-        <RouterLink :to="{ name: 'login' }">Login</RouterLink>
-        <RouterLink :to="{ name: 'profil' }">Profil</RouterLink>
-        <RouterLink :to="{ name: 'admin' }">Admin</RouterLink>
+      <div class="logo" @click="goToHome">
+        <span>ESN</span>
+      </div>
+      <nav class="links">
+        <RouterLink :to="{ name: 'home' }" class="nav-link">Home</RouterLink>
+        <RouterLink :to="{ name: 'add-post-view' }" class="nav-link">Post</RouterLink>
+        <RouterLink :to="{ name: 'login' }" class="nav-link">Login</RouterLink>
+        <RouterLink :to="{ name: 'profil' }" class="nav-link">Profil</RouterLink>
+        <RouterLink :to="{ name: 'admin' }" class="nav-link">Admin</RouterLink>
       </nav>
     </header>
+    <div class="content">
+      <!-- Your main content here -->
+    </div>
   </div>
 </template>
 
+<script setup>
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const goToHome = () => {
+  router.push({ name: 'home' });
+};
+</script>
+
 <style scoped>
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh; /* Ensure header spans the full viewport height */
+  width: 6rem; /* Fixed width for the left-side navigation */
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: #3c009c;
+  color: #fff;
+  z-index: 1000;
 }
 
-nav {
-  align-items: center;
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer; /* Add cursor pointer to indicate clickable */
+  margin-bottom: 1rem; /* Add margin to the bottom of the logo */
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.links {
+  display: flex;
+  flex-direction: column;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
+.nav-link.router-link-exact-active {
+  font-weight: bold;
 }
 </style>

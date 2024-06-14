@@ -14,3 +14,9 @@ a,
   transition: 0.4s;
   padding: 3px;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+}

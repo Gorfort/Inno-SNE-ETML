@@ -13,11 +13,11 @@
         <p>{{ comment.username }}</p>
         <p>{{ comment.comment }}</p>
         <div class="reply-section">
-          <button class="reply-button" @click="handleReply(comment.idComment)">Reply</button>
+          <button class="reply-button" @click="handleReply(comment.idComment)">Répondre</button>
           <div v-if="replyingToComment === comment.idComment" class="reply-form">
             <form @submit.prevent="onReplySubmit(comment.idComment)">
               <input type="text" placeholder="Add a reply" v-model="replyContent" />
-              <button type="submit">Send</button>
+              <button type="submit">Commenter</button>
             </form>
           </div>
         </div>
@@ -32,7 +32,7 @@
       </div>
       <form @submit.prevent="onSubmit">
         <input type="text" placeholder="Add a comment" v-model="commentContent" />
-        <button type="submit">Send</button>
+        <button type="submit">Commenter</button>
       </form>
     </div>
   </div>
@@ -128,10 +128,9 @@ function handleReply(commentId) {
   replyingToComment.value = commentId
 }
 </script>
-
 <style scoped>
 body {
-  background-color: #121212; /* Dark background for the body */
+  background-color: #ffffff; /* Dark background for the body */
   color: #e0e0e0; /* Light text color */
   font-family: Arial, sans-serif;
   margin: 0;
@@ -142,35 +141,36 @@ body {
 .heading {
   text-align: center;
   margin-top: 2rem;
-  color: #ffffff;
+  color: #000000;
 }
 
 #post {
-  background-color: #1e1e1e; /* Dark background for the post */
+  background-color: #cccccc; /* Dark background for the post */
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   margin: 2rem auto;
   width: 100%;
   max-width: 600px;
+  min-width: 600px;
 }
 
 #post h2 {
   font-size: 1.75rem;
   margin-bottom: 1rem;
-  color: #ffffff; /* Light text color */
+  color: #000000; /* Light text color */
 }
 
 #post h3 {
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: #b0b0b0; /* Slightly lighter text color */
+  color: #000000; /* Slightly lighter text color */
 }
 
 #post .author {
   font-size: 1rem;
   margin-top: 1rem;
-  color: #a0a0a0; /* Lighter text color */
+  color: #3f00a5; /* Lighter text color */
   text-align: left; /* Align the author's name to the left */
 }
 
@@ -183,14 +183,14 @@ body {
 #comments h2 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #ffffff; /* Light text color */
+  color: #000000; /* Light text color */
 }
 
 form {
   display: flex;
   flex-direction: column;
   margin-top: 1.5rem;
-  background-color: #2b2b2b;
+  background-color: #cccccc;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -201,8 +201,8 @@ form input[type="text"] {
   margin-bottom: 1rem;
   border: 1px solid #333;
   border-radius: 4px;
-  background-color: #1e1e1e;
-  color: #e0e0e0;
+  background-color: #b9b9b9;
+  color: #000000;
   font-size: 1rem;
 }
 
@@ -222,7 +222,7 @@ form button:hover {
 }
 
 .comment {
-  background-color: #1e1e1e;
+  background-color: #cccccc;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -232,12 +232,12 @@ form button:hover {
 
 .comment p {
   margin: 0.5rem 0;
-  color: #e0e0e0;
+  color: #000000;
 }
 
 .comment p:first-child {
   font-weight: bold;
-  color: #ffffff;
+  color: #000000;
 }
 
 .reply-section {
@@ -249,7 +249,7 @@ form button:hover {
   bottom: 1rem;
   right: 1rem;
   background-color: #007bff;
-  color: white;
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 4px;
   padding: 0.5rem;
@@ -262,7 +262,7 @@ form button:hover {
 }
 
 .reply-form {
-  background-color: #2b2b2b; /* Slightly lighter background for the reply form */
+  background-color: #cccccc; /* Slightly lighter background for the reply form */
   padding: 1rem;
   border-radius: 8px;
   margin-top: 0.5rem;
@@ -274,8 +274,8 @@ form button:hover {
   margin-bottom: 0.5rem;
   border: 1px solid #333;
   border-radius: 4px;
-  background-color: #1e1e1e;
-  color: #e0e0e0;
+  background-color: #ffffff;
+  color: #000000;
   font-size: 1rem;
 }
 
@@ -284,12 +284,12 @@ form button:hover {
 }
 
 .replies .reply {
-  background-color: #2b2b2b; /* Lighter gray background for replies */
+  background-color: #cccccc; /* Lighter gray background for replies */
   margin-top: 0.5rem;
 }
 
 .reply-content {
-  background-color: #383838; /* Different color for replies */
+  background-color: #cccccc; /* Different color for replies */
   padding: 0.75rem;
   border-radius: 4px;
 }

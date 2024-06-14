@@ -20,15 +20,18 @@ async function OnSubmit() {
 
 <template>
   <div>
+    <h1 style="text-align: center;">Login</h1> <!-- Center-align the h1 heading -->
     <form @submit.prevent="OnSubmit">
       <input type="text" placeholder="Username" v-model="user.username" />
       <input type="password" placeholder="Password" v-model="user.password" />
       <p class="success" v-show="Successful">Connection Successful</p>
-      <p class="failed" v-show="failed">Connected failed</p>
+      <p class="failed" v-show="failed">Connection failed</p>
       <button>Submit</button>
     </form>
   </div>
 </template>
+
+
 
 <style scoped>
 form {
@@ -39,7 +42,7 @@ form {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #2b2b2b;
+  background-color: #cccccc;
 }
 
 input[type="text"],
