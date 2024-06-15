@@ -6,6 +6,7 @@ const users = ref([])
 const notAllowed = ref(false)
 
 onMounted(async () => {
+  document.title = 'ESN - Admin'
   try {
     const response = await axios.getAdmin()
     users.value = response.data.data

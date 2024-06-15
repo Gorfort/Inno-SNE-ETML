@@ -1,10 +1,15 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import axios from '@/Services/axios'
 import router from '@/router'
 
 const users = ref([])
 const user = ref({})
+
+// Set document title when component is mounted
+onMounted(() => {
+  document.title = 'ESN - Profil'
+})
 
 onMounted(async () => {
   const isConnected = () => {

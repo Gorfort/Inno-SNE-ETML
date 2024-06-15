@@ -2,14 +2,16 @@
   <div>
     <header>
       <div class="logo" @click="goToHome">
-        <img src="../../../SNE_FRONT/src/images/Logo-Web.png" alt="ESN Logo">
+        <img src="https://raw.githubusercontent.com/Gorfort/Inno-SNE-ETML/TRE_StyleFrontEnd_V2/SNE_APP/SNE_FRONT/src/images/Logo-Web.png" alt="ESN Logo">
       </div>
       <nav class="links">
-        <RouterLink :to="{ name: 'home' }" class="nav-link">Home</RouterLink>
-        <RouterLink :to="{ name: 'add-post-view' }" class="nav-link">Post</RouterLink>
-        <RouterLink :to="{ name: 'login' }" class="nav-link">Login</RouterLink>
-        <RouterLink :to="{ name: 'profil' }" class="nav-link">Profil</RouterLink>
-        <RouterLink :to="{ name: 'admin' }" class="nav-link">Admin</RouterLink>
+        <div class="nav-links">
+          <RouterLink :to="{ name: 'home' }" class="nav-link">Home</RouterLink>
+          <RouterLink :to="{ name: 'add-post-view' }" class="nav-link">Post</RouterLink>
+          <RouterLink :to="{ name: 'login' }" class="nav-link">Login</RouterLink>
+          <RouterLink :to="{ name: 'profil' }" class="nav-link">Profil</RouterLink>
+        </div>
+        <RouterLink :to="{ name: 'admin' }" class="nav-link nav-link-admin">Admin</RouterLink>
       </nav>
     </header>
     <div class="content">
@@ -59,6 +61,14 @@ header {
 .links {
   display: flex;
   flex-direction: column;
+  flex-grow: 1; /* Allow links to grow to fill available space */
+  justify-content: space-between; /* Distribute space between links */
+  width: 100%;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
 }
 
 .nav-link {
@@ -70,5 +80,9 @@ header {
 
 .nav-link.router-link-exact-active {
   font-weight: bold;
+}
+
+.nav-link-admin {
+  margin-top: auto; /* Push the Admin link to the bottom */
 }
 </style>
