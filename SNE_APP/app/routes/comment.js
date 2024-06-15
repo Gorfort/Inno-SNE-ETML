@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 import auth from "../auth/auth.js"; // Import du middleware d'authentification
 import connection from "../mysql/MySql.js";
 
@@ -13,6 +13,24 @@ commentRouter.get("/", auth, (req, res) => {
       const message = "Erreur du serveur interne, veuillez ressayer plus tard";
       console.log(error);
       return res.status(500).json({ message });
+    }
+    if (result.length === 0) {
+      const message = "Aucun commentaire trouvé";
+      return res.status(404).json({ message });
+    } else {
+      return res.json({ result });
+    }
+  });
+});
+
+// Route qui permet de récupérer toutes les réponse à un commentaire
+commentRouter.get("/:id/comments", auth, (req, res) => {
+  const query =
+    "SELECT * FROM t_comments JOIN t_posts ON t_posts.idPost = t_comments.fk_Post JOIN t_user ON t_user.idUser = t_comments.fk_User WHERE reply_to = ?";
+  connection.query(query, [req.params.id], (error, result) => {
+    if (error) {
+      const message = "Erreur du serveur interne, veuillez ressayer plus tard.";
+      return res.status(500).json({ messagee });
     }
     if (result.length === 0) {
       const message = "Aucun commentaire trouvé";
