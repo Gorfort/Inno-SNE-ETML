@@ -2,7 +2,7 @@
   <div>
     <header>
       <div class="logo" @click="goToHome">
-        <img src="https://raw.githubusercontent.com/Gorfort/Inno-SNE-ETML/TRE_StyleFrontEnd_V2/SNE_APP/SNE_FRONT/src/images/Logo-Web.png" alt="ESN Logo">
+        <img src="https://raw.githubusercontent.com/Gorfort/Inno-SNE-ETML/TRE_StyleFrontEnd_V2/SNE_APP/SNE_FRONT/src/images/LogoWeb.png" alt="ESN Logo">
       </div>
       <nav class="links">
         <div class="nav-links">
@@ -11,7 +11,9 @@
           <RouterLink :to="{ name: 'login' }" class="nav-link">Login</RouterLink>
           <RouterLink :to="{ name: 'profil' }" class="nav-link">Profil</RouterLink>
         </div>
-        <RouterLink :to="{ name: 'admin' }" class="nav-link nav-link-admin">Admin</RouterLink>
+        <RouterLink :to="{ name: 'admin' }" class="nav-link nav-link-admin">
+          <img src="https://raw.githubusercontent.com/Gorfort/Inno-SNE-ETML/TRE_StyleFrontEnd_V2/SNE_APP/SNE_FRONT/src/images/Gear-icon.png" alt="Admin">
+        </RouterLink>
       </nav>
     </header>
     <div class="content">
@@ -49,13 +51,13 @@ header {
 
 .logo {
   cursor: pointer; /* Add cursor pointer to indicate clickable */
-  margin-bottom: 1rem; /* Add margin to the bottom of the logo */
+  margin-bottom: 10px; /* Add margin to the bottom of the logo */
 }
 
 .logo img {
   width: 100%; /* Ensure the image takes up the full width of the container */
   max-width: 100%;
-  height: auto; /* Maintain aspect ratio */
+  height: auto; 
 }
 
 .links {
@@ -84,5 +86,14 @@ header {
 
 .nav-link-admin {
   margin-top: auto; /* Push the Admin link to the bottom */
+}
+
+.nav-link-admin img {
+  width: 60px; /* Adjust the width as needed */
+  height: 60px; /* Adjust the height as needed */
+  max-width: 100%; /* Ensure it doesn’t exceed the container’s width */
+  max-height: 100%; /* Ensure it doesn’t exceed the container’s height */
+  display: block;
+  margin: auto; /* Center the image */
 }
 </style>
