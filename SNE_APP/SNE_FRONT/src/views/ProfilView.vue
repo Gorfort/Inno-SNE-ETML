@@ -1,10 +1,15 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import axios from '@/Services/axios'
 import router from '@/router'
 
 const users = ref([])
 const user = ref({})
+
+// Set document title when component is mounted
+onMounted(() => {
+  document.title = 'ESN - Profil'
+})
 
 onMounted(async () => {
   const isConnected = () => {
@@ -35,6 +40,7 @@ async function logOut() {
 
 <template>
   <div class="about">
+    <h1 style="text-align: center; margin-bottom: 2rem;">Votre Profil</h1> <!-- Centered h1 heading -->
     <div class="user-profile">
       <h1>{{ user.username }}</h1>
       <p>{{ user.email }}</p>
@@ -48,12 +54,11 @@ async function logOut() {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100%;
 }
 
 .user-profile {
-  background-color: #1e1e1e; /* Dark background for the user profile */
+  background-color: #ffffff;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -64,13 +69,13 @@ async function logOut() {
 .user-profile h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
-  color: #ffffff; /* Light text color */
+  color: #000000;
 }
 
 .user-profile p {
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: #b0b0b0; /* Slightly lighter text color */
+  color: #510080;
 }
 
 .logout-btn {

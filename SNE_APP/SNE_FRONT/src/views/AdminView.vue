@@ -6,6 +6,7 @@ const users = ref([])
 const notAllowed = ref(false)
 
 onMounted(async () => {
+  document.title = 'ESN - Admin'
   try {
     const response = await axios.getAdmin()
     users.value = response.data.data
@@ -44,7 +45,7 @@ onMounted(async () => {
 }
 
 .user-card {
-  background-color: #1e1e1e; /* Dark background for the user card */
+  background-color: #cccccc; 
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -53,12 +54,12 @@ onMounted(async () => {
 .user-card h1 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: #ffffff; /* Light text color */
+  color: #000000; 
 }
 
 .user-card p {
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: #b0b0b0; /* Slightly lighter text color */
+  color: #630077; 
 }
 </style>

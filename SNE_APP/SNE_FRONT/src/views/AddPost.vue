@@ -1,17 +1,33 @@
+<template>
+  <div>
+    <h1 style="text-align: center;">Ajoutez un post</h1>
+    <form @submit.prevent="onSubmit">
+      <input type="text" placeholder="Titre" v-model="post.title" />
+      <textarea placeholder="Content" v-model="post.content"></textarea>
+      <button type="submit">Poster</button>
+    </form>
+  </div>
+</template>
+
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import axios from '@/Services/axios'
 import router from '@/router'
 
 const post = ref({})
 
-// Permet de vérifié si l'utilisateur est bien connecté
+// Set document title when component is mounted
+onMounted(() => {
+  document.title = 'ESN - Add Post'
+})
+
+// Check if the user is connected
 onMounted(async () => {
   const isConnected = () => {
     return !!sessionStorage.getItem('token')
   }
 
-  // Si l'utilisateur n'est pas connecter il est renvoyer à la page de connexion
+  // If the user is not connected, redirect to the login page
   if (!isConnected()) {
     await alert("You're not connected, please login")
     router.push({ name: 'login' })
@@ -32,19 +48,10 @@ async function onSubmit() {
 }
 </script>
 
-<template>
-  <div>
-    <form @submit.prevent="onSubmit">
-      <input type="text" placeholder="Titre" v-model="post.title" />
-      <textarea placeholder="Content" v-model="post.content"></textarea>
-      <button type="submit" value="Submit">Poster</button>
-    </form>
-  </div>
-</template>
 <style scoped>
 body {
-  background-color: #121212; /* Dark background for the body */
-  color: #e0e0e0; /* Light text color */
+  background-color: #121212;
+  color: #e0e0e0;
   font-family: Arial, sans-serif;
 }
 
@@ -53,11 +60,13 @@ form {
   flex-direction: column;
   width: 100%;
   max-width: 600px;
-  margin: 2rem auto;
+  min-width: 600px;
+  margin: auto;
   padding: 2rem;
   border-radius: 8px;
-  background-color: #1e1e1e; /* Dark background for the form */
+  background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  margin-top: 15px;
 }
 
 form input[type="text"],
@@ -66,14 +75,14 @@ form textarea {
   margin-bottom: 1rem;
   border: 1px solid #333;
   border-radius: 4px;
-  background-color: #2b2b2b;
-  color: #e0e0e0;
+  background-color: #eeeeee;
+  color: #3d3d3d;
   font-size: 1rem;
 }
 
 form textarea {
-  resize: vertical; /* Allow vertical resizing */
-  height: 150px; /* Default height for the textarea */
+  resize: vertical;
+  height: 150px;
 }
 
 form input[type="text"]:focus,
@@ -98,4 +107,3 @@ form button:hover {
   background-color: #0056b3;
 }
 </style>
-
