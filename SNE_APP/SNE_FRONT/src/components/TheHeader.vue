@@ -2,7 +2,7 @@
   <div>
     <header>
       <div class="logo" @click="goToHome">
-        <img src="https://raw.githubusercontent.com/Gorfort/Inno-SNE-ETML/TRE_StyleFrontEnd_V2/SNE_APP/SNE_FRONT/src/images/LogoWeb.png" alt="ESN Logo">
+        <img src="https://raw.githubusercontent.com/Gorfort/Inno-SNE-ETML/main/SNE_APP/SNE_FRONT/src/images/LogoWeb.png" alt="ESN Logo">
       </div>
       <nav class="links">
         <div class="nav-links">
@@ -12,7 +12,7 @@
           <RouterLink :to="{ name: 'profil' }" class="nav-link">Profil</RouterLink>
         </div>
         <RouterLink :to="{ name: 'admin' }" class="nav-link nav-link-admin">
-          <img src="https://raw.githubusercontent.com/Gorfort/Inno-SNE-ETML/TRE_StyleFrontEnd_V2/SNE_APP/SNE_FRONT/src/images/Gear-icon.png" alt="Admin">
+          <img src="https://raw.githubusercontent.com/Gorfort/Inno-SNE-ETML/main/SNE_APP/SNE_FRONT/src/images/Gear-icon.png" alt="Admin">
         </RouterLink>
       </nav>
     </header>
