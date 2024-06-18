@@ -45,7 +45,7 @@ onMounted(async () => {
 }
 
 .user-card {
-  background-color: #cccccc; 
+  background-color: #cccccc;
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -54,12 +54,12 @@ onMounted(async () => {
 .user-card h1 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: #000000; 
+  color: #000000;
 }
 
 .user-card p {
   font-size: 1rem;
   margin-bottom: 0.5rem;
-  color: #630077; 
+  color: #630077;
 }
 </style>
