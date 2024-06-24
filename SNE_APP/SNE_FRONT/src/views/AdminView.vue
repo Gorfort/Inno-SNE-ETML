@@ -1,9 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from '@/Services/axios'
+import { useRouter } from 'vue-router'
 
 const users = ref([])
 const notAllowed = ref(false)
+const router = useRouter()
 
 onMounted(async () => {
   document.title = 'ESN - Admin'
@@ -19,23 +21,57 @@ onMounted(async () => {
 
 <template>
   <div>
-    <p class="notAllowed" v-show="notAllowed">You're not allowed</p>
-    <div v-if="users.length > 0" class="user-list">
+    <h1>Page Admin</h1>
+    <div v-if="notAllowed" class="center-container">
+      <p class="notAllowed">You need to be an Admin to access this page</p>
+      <router-link to="/" class="home-button">Go to Home</router-link>
+    </div>
+    <div v-if="users.length > 0 && !notAllowed" class="user-list">
       <div v-for="user in users" :key="user.id" class="user-card">
         <h1>{{ user.username }}</h1>
         <p>{{ user.email }}</p>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="!notAllowed">
       <p>No users found.</p>
     </div>
   </div>
 </template>
 
 <style scoped>
+h1 {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.center-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 80vh;
+  text-align: center;
+}
+
 .notAllowed {
   color: red;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.home-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.home-button:hover {
+  background-color: #0056b3;
 }
 
 .user-list {
