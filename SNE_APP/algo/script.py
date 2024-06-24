@@ -1,9 +1,9 @@
 from json import load, dump
-from requests import get, post, put
+from requests import get, post, put # type: ignore
 from time import sleep
-import re
+from re import findall, sub
 
-def get_token(username : str = "", password : str = ""):
+def get_token(username : str = "", password : str = "") -> str:
     """Get the token From the API and return it
     
     If the arguments `username` and `password` aren't passed the value empty is used
@@ -13,14 +13,19 @@ def get_token(username : str = "", password : str = ""):
     username : str, optional
         The username of user.
     password : str, optional
-        The password of the user 
+        The password of the user
+
+    Returns
+    -------
+    token : str
+        The token send by the api
     
     """
     res = post('http://nodejs:443/login', json={ 'username': username, 'password': password })
     token = res.json()['token']
     return token
 
-def initialize_json():
+def initialize_json() -> None:
     """initiliatize the json for the dictionnary"""
     with open('data.json', 'r', encoding='utf-8') as file:
         data = load(file)
@@ -41,12 +46,17 @@ def change_text(txt : str = "") -> str:
     ----------
     txt : str
         The text to normalize
+
+    Returns
+    -------
+    txt : str
+        The text who is normalized
     """
     letter = ['o', 'i', '2', 'e', 'a', 's', '7', 'z', '8', '9']
 
-    txt = re.sub(r"[^a-zA-Z\d\s]+", "", txt)
+    txt = sub(r"[^a-zA-Z\d\s]+", "", txt)
 
-    r = re.findall(r'\d', txt)
+    r = findall(r'\d', txt)
 
     for s in r:
         txt = txt.replace(s, letter[int(s)])
@@ -86,7 +96,7 @@ class Comment:
         self.new_comments = []
         self.number_new_comment = 0
 
-    def check_new_comment(self):
+    def check_new_comment(self) -> None:
         """Check if new comments have benn posted and handle it"""
         with open("data.json", "r", encoding='utf-8') as file:
             secret_word = load(file)
@@ -101,7 +111,7 @@ class Comment:
             if current_content != c['comment']:
                 self.put_comment(c['idComment'], { 'comment': c['comment'] } )
 
-    def check_comment(self):
+    def check_comment(self) -> None:
         """Main Loop of the Comment class if a new comment was found call the function check_new_comment"""
         if self.number_comment < len(self.comments):
             self.number_new_comment = len(self.comments) - self.number_comment
@@ -109,23 +119,20 @@ class Comment:
             print("Nous avons trouvé " + str(self.number_new_comment) + " nouveau commentaire")
             self.check_new_comment()
             self.number_comment = len(self.comments)
-        else:
-            print("Aucun nouveau commentaire à été trouvé !!!")
 
 
-    def get_comments(self):
+    def get_comments(self) -> list:
         """Do a GET HTTP request on the API and return the result
         
         Returns
         -------
-        list
+        datas : list
             All the data from the API
         """
         req = get('http://nodejs:443/comment', headers=custom_headers)
-        print("Les commentaires ont bien été récupéré")
         return req.json()['result']
     
-    def put_comment(self, id, data):
+    def put_comment(self, id, data) -> None:
         """Do a PUT HTTP Request on the api if the function check_new_comment find an irregular word"""
         put(url='http://nodejs:443/comment/' + str(id), json=data, headers=custom_headers)
         print("Le commentaire a bien été modifié")
@@ -163,7 +170,7 @@ class Post:
         self.new_posts = []
         self.number_new_post = 0
 
-    def check_new_post(self):
+    def check_new_post(self) -> None:
         """Check if any offensive word is in the new post retrieve"""
         with open("data.json", "r", encoding='utf-8') as file:
             secret_word = load(file)
@@ -182,7 +189,7 @@ class Post:
             if current_content != p['content'] or current_title != p['title']:
                 self.put_post(p['idPost'], { 'title': p['title'], 'content': p['content'] } )
 
-    def check_post(self):
+    def check_post(self) -> None:
         """Main loop of the class call the function check_new_post if the algorythm discover new post"""
         if self.number_post < len(self.posts):
             self.number_new_post = len(self.posts) - self.number_post
@@ -190,41 +197,36 @@ class Post:
             print("Nous avons trouvé " + str(self.number_new_post) + " nouveau poste")
             self.check_new_post()
             self.number_post = len(self.posts)
-        else:
-            print("Aucun nouveau post à été trouvé !!!")
 
-
-    def get_posts(self):
+    def get_posts(self) -> list:
         """Doing a GET HTTP request to the API and return the result
         
         Returns
         -------
-        list
+        datas : list
             All the data from the API
         """
         req = get('http://nodejs:443/post', headers=custom_headers)
-        print("Les posts ont bien été récupéré")
         return req.json()['data']
     
-    def put_post(self, id, data):
+    def put_post(self, id, data) -> None:
         """Doing a PUT HTTP request to the API to remove the offensive word"""
         put(url='http://nodejs:443/post/' + str(id), json=data, headers=custom_headers)
         print("Le post a bien été modifié")
 
-#user_post = Post()
-#comment = Comment()
+user_post = Post()
+comment = Comment()
 
-#custom_headers = {'Authorization': 'Bearer ' + get_token('Admin', 'password')}
+custom_headers = {'Authorization': 'Bearer ' + get_token('Admin', 'password')}
 
-#initialize_json()
+initialize_json()
 
 # Main Loop of the program. This script work 24/24 so a infinite loop is appropriate
-#while True:
-    #user_post.posts = user_post.get_posts()
-    #comment.comments = comment.get_comments()
+while True:
+    user_post.posts = user_post.get_posts()
+    comment.comments = comment.get_comments()
 
-    #user_post.check_post()
-    #comment.check_comment()
+    user_post.check_post()
+    comment.check_comment()
 
-    #sleep(2)
-    #print("\n")
+    sleep(2)
