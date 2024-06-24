@@ -19,7 +19,7 @@ onMounted(async () => {
 
 // Optional: Reset document title on component unmount
 onBeforeUnmount(() => {
-  document.title = 'Original Title'; // Replace with your original title
+  document.title = 'ESN - Post'; 
 })
 </script>
 
