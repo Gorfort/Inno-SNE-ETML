@@ -53,25 +53,69 @@ git clone https://github.com/Gorfort/Inno-SNE-ETML.git
 cd Inno-SNE-ETML
 git checkout QMZ_Py
 cd SNE_APP
-cd algopip
-python -m venv .venv
-./.venv/Scripts/Activate.ps1
+cd algo
 pip install -r requirements.txt
 python3 script.py
 ```
 
-#### When you have finished your work launch this command :
+### Documentation
+
+For creating your own documentation with python check my code and see how i do my documentation.
+
+#### Powershell
+
+After that run these command :
 
 ```sh
-deactivate
+pip install sphynx
+docker run -it --rm -v ${PWD}/script.py:/docs sphinxdoc/sphinx shpinx-quickstart
 ```
 
-#### Issue n°1
+Response to the question with :
+y
+the name of your project
+your name
+your language in the format of two letter like fr,en,es
 
-if this command failed `./.venv/Scripts/Activate.ps1` :
+#### File script.rst
 
-Here's is some solution :
+create a file named script.rst :
 
-* If powershell isn't installed in your system. Installe it at this [url](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.4)
-* You can change your ExecutionPolicy to RemoteSigned with this command `Set-ExecutionPolicy RemoteSigned` in a terminal admin
-* If it's not working try this command instead `./.venv/Scripts/activate.bat`
+Here's the content :
+
+```rst
+.. _script:
+
+Script Documentation
+=====================
+
+.. automodule:: script
+   :members:
+   :undoc-members:
+   :show-inheritance:
+```
+
+#### File index.rst
+
+Add below the line `:caption: Contents:` the word script.
+
+#### File config.py
+
+Into the file config.py :
+
+Add the code below on first line of the file :
+```py
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../'))
+```
+
+Add in the list of the extension you can add manually the string `'sphinx.ext.autodoc'`
+
+#### Powershell
+
+The last thing to do is running this command :
+
+```sh
+docker run -it --rm -v ${PWD}:/docs sphinxdoc/sphinx sphinx-build /docs/source /docs/build
+```
