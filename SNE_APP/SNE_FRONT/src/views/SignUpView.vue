@@ -1,48 +1,36 @@
 <script setup>
 import { ref } from 'vue'
 import axios from '@/Services/axios'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
 const user = ref({})
 const router = useRouter()
-let Successful = ref(false)
-let failed = ref(false)
 
 async function OnSubmit() {
   try {
-    await axios.login(user.value)
-    Successful.value = true
+    await axios.signup(user.value)
     user.value.username = ''
     user.value.password = ''
-  } catch (error) {
-    failed.value = true
-    console.log(error)
-  }
-}
-
-async function SignUp() {
-  try {
-    router.push({ name: 'signup' })
+    user.value.email = ''
+    router.push({ name: 'login' })
   } catch (error) {
     console.log(error)
   }
 }
 
 // Set the page title dynamically
-document.title = 'ESN - Login';
+document.title = 'ESN - Sign Up';
 </script>
 
 <template>
   <div>
-    <h1 style="text-align: center;">Login</h1>
+    <h1 style="text-align: center;">Sign Up</h1>
     <form @submit.prevent="OnSubmit">
       <input type="text" placeholder="Username" v-model="user.username" />
       <input type="password" placeholder="Password" v-model="user.password" />
-      <p class="success" v-show="Successful">Connection Successful</p>
-      <p class="failed" v-show="failed">Connection failed</p>
+      <input type="email" placeholder="Email" v-model="user.email">
       <button>Submit</button>
     </form>
-    <button @click="SignUp">Sign Up</button>
   </div>
 </template>
 
@@ -60,7 +48,8 @@ form {
 }
 
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
   margin-bottom: 1rem;
   padding: 0.75rem;
   border: 1px solid #ccc;
@@ -69,7 +58,8 @@ input[type="password"] {
 }
 
 input[type="text"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="email"]:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);

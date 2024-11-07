@@ -9,7 +9,7 @@
 
 services:
   db:
-    image: mysql:8.0.30
+    image: mysql
     container_name: db_container
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -23,7 +23,7 @@ services:
       - dbdata:/var/lib/mysql
 
   phpmyadmin:
-    image: phpmyadmin:5.2.0
+    image: phpmyadmin
     container_name: pma_container
     links:
       - db
