@@ -60,5 +60,9 @@ app.use("/signin", signinRouter);
 // Routes pour les Admins
 import adminRouter from "./routes/admin.js";
 app.use("/admin", adminRouter);
+
+import sectionRouter from "./routes/section.js";
+app.use('/section', sectionRouter)
+
 // Démarrage du serveur en HTTP
 app.listen(443);
