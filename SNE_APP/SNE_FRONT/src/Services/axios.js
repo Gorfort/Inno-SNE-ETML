@@ -22,7 +22,9 @@ export default {
       sessionStorage.setItem('token', response.data.token)
     })
   },
-
+  signup(user) {
+    api.post('signin', user)
+  },
   /**
    * Récupère l'utilisateur qui est connecté
    * @returns Renvoie l'utilisateur qui est connecté

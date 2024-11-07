@@ -71,7 +71,7 @@ CREATE TABLE `t_posts` (
 
 INSERT INTO `t_posts` (`idPost`, `title`, `content`, `fk_User`, `created_At`) VALUES
 (1, 'Publication test 1', 'Ceci est une publication de test, elle servira à tester notre réseaux social lors de son développement. ', 1, '2024-06-12 09:04:16'),
-(2, 'Test publication 2', 'Ceci est une deuxième publication de test, toujours pour tester l\'application lors de son développement', 2, '2024-06-12 09:04:16'),
+(2, 'Test publication 2', "Ceci est une deuxième publication de test, toujours pour tester l\'application lors de son développement", 2, '2024-06-12 09:04:16'),
 (10, 'Bon bah excrément', 'Bon bah excrément', 1, '2024-06-14 14:15:57'),
 (11, 'Crétin', 'Crétin', 1, '2024-06-14 14:23:56');
 

@@ -10,9 +10,8 @@ signinRouter.post("/", (req, res) => {
 
   // Renvoie une erreur si l'utilisateur ne remplie pas les champs requis
   if (!username || !password || !email) {
-    const message =
-      "Le username, l'email et le mot de passe sont des champs obligatoire.";
-    res.status(400).json({ message });
+    const message = "Le username, l'email et le mot de passe sont des champs obligatoire.";
+    return res.status(400).json({ message });
   }
 
   // Hash le mot de passe
@@ -25,11 +24,10 @@ signinRouter.post("/", (req, res) => {
     [username, hashedPassword, email],
     (error, result) => {
       if (error) {
-        const message =
-          "Erreur du serveur interne, veuillez ressayer plus tard.";
-        res.status(500).json({ message });
+        const message = "Erreur du serveur interne, veuillez ressayer plus tard.";
+        return res.status(500).json({ message });
       } else {
-        res.json({ message: "L'utilisateur à été créer avec succès" });
+        return res.json({ message: "L'utilisateur à été créer avec succès" });
       }
     }
   );

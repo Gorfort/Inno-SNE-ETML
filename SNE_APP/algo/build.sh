@@ -12,3 +12,5 @@ for image in "${IMAGES[@]}"
 do
     docker rmi $image
 done
+
+docker-compose up -d

@@ -8,6 +8,7 @@
         <div class="nav-links">
           <RouterLink :to="{ name: 'home' }" class="nav-link">Home</RouterLink>
           <RouterLink :to="{ name: 'add-post-view' }" class="nav-link">Post</RouterLink>
+          <RouterLink :to="{ name: 'signup'}" class="nav-link">Sign Up</RouterLink>
           <RouterLink :to="{ name: 'login' }" class="nav-link">Login</RouterLink>
           <RouterLink :to="{ name: 'profil' }" class="nav-link">Profil</RouterLink>
         </div>
@@ -38,7 +39,7 @@ header {
   top: 0;
   left: 0;
   height: 100vh; /* Ensure header spans the full viewport height */
-  width: 6rem; /* Fixed width for the left-side navigation */
+  width: 7rem; /* Fixed width for the left-side navigation */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
