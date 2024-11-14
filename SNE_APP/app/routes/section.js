@@ -4,7 +4,7 @@ import connection from "../mysql/MySql.js";
 
 const sectionRouter = express.Router();
 
-sectionRouter.get("/", auth, (req, res) => {
+sectionRouter.get("/", (req, res) => {
   const query = "SELECT * FROM t_section";
   connection.query(query, (error, result) => {
     if (error) {

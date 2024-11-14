@@ -88,6 +88,7 @@ CREATE TABLE `t_user` (
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `isAdmin` tinyint(1) DEFAULT '0',
   `status` varchar(255) NOT NULL DEFAULT 'not_verified',
+  `idSection` int NOT NULL,
   `created_At` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -95,29 +96,30 @@ CREATE TABLE `t_user` (
 -- Déchargement des données de la table `t_user`
 --
 
-INSERT INTO `t_user` (`idUser`, `username`, `password`, `email`, `isAdmin`, `status`, `created_At`) VALUES
-(1, 'Alessio', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'alessio.lopardo@eduvaud.ch', 0, 'not_verified', '2024-06-12 09:20:43'),
-(2, 'Admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin@example.com', 1, 'not_verified', '2024-06-12 09:20:43'),
-(3, 'Kent1', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'quentin.metroz@eduvaud.ch', 0, 'not_verified', '2024-06-12 09:20:43'),
-(4, 'Gorfort', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'thibaud.racine@eduvaud.ch', 0, 'not_verified', '2024-06-12 09:20:43');
+INSERT INTO `t_user` (`idUser`, `username`, `password`, `email`, `isAdmin`, `status`, `idSection`, `created_At`) VALUES
+(1, 'Alessio', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'alessio.lopardo@eduvaud.ch', 0, 'not_verified', 1, '2024-06-12 09:20:43'),
+(2, 'Admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin@example.com', 1, 'not_verified', 1, '2024-06-12 09:20:43'),
+(3, 'Kent1', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'quentin.metroz@eduvaud.ch', 0, 'not_verified', 1, '2024-06-12 09:20:43'),
+(4, 'Gorfort', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'thibaud.racine@eduvaud.ch', 0, 'not_verified', 1, '2024-06-12 09:20:43');
 
 CREATE TABLE `t_section` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-)
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
 
-INSERT INTO `t_section`(`name`) VALUES
-(1, 'Informatique'),
-(2, 'Automaticien'),
-(3, 'Ebeniste'),
-(4, 'Electronicien'),
-(5, "Mecanotricien d'automobiles"),
-(6, 'Menuisier'),
-(7, 'Polymécanicien'),
-(8, 'Preapprentissage'),
-(9, 'Maturite Professionelle');
+INSERT INTO `t_section`(`name`) VALUES 
+  ('Informatique'),
+  ('Automaticien'),
+  ('Ebeniste'),
+  ('Electronicien'),
+  ("Mecanotricien d'automobiles"),
+  ('Menuisier'),
+  ('Polymécanicien'),
+  ('Preapprentissage'),
+  ('Maturite Professionelle');
 
 --
 -- Index pour les tables déchargées
@@ -134,21 +136,13 @@ ALTER TABLE `t_comments`
 --
 -- Index pour la table `t_posts`
 --
-ALTER TABLE `t_posts`
-  ADD PRIMARY KEY (`idPost`),
-  ADD KEY `fk_User` (`fk_User`);
+ALTER TABLE `t_posts` ADD PRIMARY KEY (`idPost`), ADD KEY `fk_User` (`fk_User`);
 
 --
 -- Index pour la table `t_user`
 --
-ALTER TABLE `t_user`
-  ADD PRIMARY KEY (`idUser`);
+ALTER TABLE `t_user` ADD PRIMARY KEY (`idUser`);
 
---
--- Index pour la table `t_section` 
---
-AlTER TABLE `t_section`
-  ADD PRIMARY KEY (`id`)
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
@@ -156,20 +150,17 @@ AlTER TABLE `t_section`
 --
 -- AUTO_INCREMENT pour la table `t_comments`
 --
-ALTER TABLE `t_comments`
-  MODIFY `idComment` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+ALTER TABLE `t_comments` MODIFY `idComment` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `t_posts`
 --
-ALTER TABLE `t_posts`
-  MODIFY `idPost` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `t_posts` MODIFY `idPost` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `t_user`
 --
-ALTER TABLE `t_user`
-  MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `t_user` MODIFY `idUser` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
@@ -187,6 +178,12 @@ ALTER TABLE `t_comments`
 --
 ALTER TABLE `t_posts`
   ADD CONSTRAINT `t_posts_ibfk_1` FOREIGN KEY (`fk_User`) REFERENCES `t_user` (`idUser`);
+
+--
+-- Contraints pour la table `t_user`
+--
+ALTER TABLE `t_user`
+  ADD CONSTRAINT `t_user_ibfk1` FOREIGN KEY (`idSection`) REFERENCES `t_section` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

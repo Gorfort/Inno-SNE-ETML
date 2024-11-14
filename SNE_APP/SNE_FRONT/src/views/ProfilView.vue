@@ -26,6 +26,9 @@ onMounted(async () => {
       const response = await axios.getUser()
       users.value = response.data.data
       user.value = users.value[0]
+      const user_api = await axios.getSection(user.value.idSection)
+      user.value.section = user_api.data.data[0].name
+      //user.value.section = await axios.getSection(user.value.idSection).data
     } catch (error) {
       console.log(error)
     }
@@ -43,6 +46,7 @@ async function logOut() {
     <h1 style="text-align: center; margin-bottom: 2rem;">Votre Profil</h1> <!-- Centered h1 heading -->
     <div class="user-profile">
       <h1>{{ user.username }}</h1>
+      <p>{{ user.section }}</p>
       <p>{{ user.email }}</p>
     </div>
     <button class="logout-btn" @click="logOut">Log Out</button>
