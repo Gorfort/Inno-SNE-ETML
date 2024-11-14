@@ -4,17 +4,19 @@
     <form @submit.prevent="onSubmit">
       <input type="text" placeholder="Titre" v-model="post.title" />
       <textarea placeholder="Content" v-model="post.content"></textarea>
+      <p v-if="!isGood" style="color: red;">Trop de charactères dans l'un des deux champs</p>
       <button type="submit">Poster</button>
     </form>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from '@/Services/axios'
 import router from '@/router'
 
 const post = ref({})
+const isGood = ref(true)
 
 // Set document title when component is mounted
 onMounted(() => {
@@ -36,7 +38,8 @@ onMounted(async () => {
 
 async function onSubmit() {
   console.log(post.value)
-  await axios
+  if(post.value.title.length <= 150 && post.value.title.content <= 250) {
+    await axios
     .addPost(post.value)
     .then((response) => {
       console.log(response)
@@ -45,6 +48,9 @@ async function onSubmit() {
     .catch((error) => {
       console.log(error)
     })
+  } else {
+    isGood.value = false
+  }
 }
 </script>
 
