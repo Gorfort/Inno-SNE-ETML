@@ -101,6 +101,24 @@ INSERT INTO `t_user` (`idUser`, `username`, `password`, `email`, `isAdmin`, `sta
 (3, 'Kent1', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'quentin.metroz@eduvaud.ch', 0, 'not_verified', '2024-06-12 09:20:43'),
 (4, 'Gorfort', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'thibaud.racine@eduvaud.ch', 0, 'not_verified', '2024-06-12 09:20:43');
 
+CREATE TABLE `t_section` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `createdAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+)
+
+INSERT INTO `t_section`(`name`) VALUES
+(1, 'Informatique'),
+(2, 'Automaticien'),
+(3, 'Ebeniste'),
+(4, 'Electronicien'),
+(5, "Mecanotricien d'automobiles"),
+(6, 'Menuisier'),
+(7, 'Polymécanicien'),
+(8, 'Preapprentissage'),
+(9, 'Maturite Professionelle');
+
 --
 -- Index pour les tables déchargées
 --
@@ -126,6 +144,11 @@ ALTER TABLE `t_posts`
 ALTER TABLE `t_user`
   ADD PRIMARY KEY (`idUser`);
 
+--
+-- Index pour la table `t_section` 
+--
+AlTER TABLE `t_section`
+  ADD PRIMARY KEY (`id`)
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
