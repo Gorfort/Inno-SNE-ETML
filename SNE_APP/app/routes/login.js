@@ -42,7 +42,7 @@ loginRouter.post("/", (req, res) => {
     if (isPasswordCorrect) {
       // Si les mots de passe correspondent, générer un token JWT
       const token = jwt.sign(
-        { userId: user.idUser, userIsAdmin: user.isAdmin },
+        { userId: user.idUser, userIsAdmin: user.isAdmin, section: user.idSection },
         privateKey,
         {
           expiresIn: "1y", // Le token expire en 1 an

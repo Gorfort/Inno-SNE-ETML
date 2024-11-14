@@ -1,10 +1,21 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import axios from '@/Services/axios'
 import { useRouter } from 'vue-router'
 
 const user = ref({})
 const router = useRouter()
+const sections = ref([])
+
+onMounted(async () => {
+  try {
+    const s = await axios.getSections()
+    sections.value = s.data.data
+  } catch (error) {
+    console.log("An error occured")
+    console.log(error)
+  }
+})
 
 async function OnSubmit() {
   try {
@@ -12,6 +23,7 @@ async function OnSubmit() {
     user.value.username = ''
     user.value.password = ''
     user.value.email = ''
+    user.value.section = ""
     router.push({ name: 'login' })
   } catch (error) {
     console.log(error)
@@ -29,6 +41,10 @@ document.title = 'ESN - Sign Up';
       <input type="text" placeholder="Username" v-model="user.username" />
       <input type="password" placeholder="Password" v-model="user.password" />
       <input type="email" placeholder="Email" v-model="user.email">
+      <select name="section" id="section" v-model="user.section">
+        <option value="0"></option>
+        <option v-for="(item, index) in sections" :key="index" :value="item.id">{{  item.name }}</option>
+      </select>
       <button>Submit</button>
     </form>
   </div>
@@ -49,7 +65,9 @@ form {
 
 input[type="text"],
 input[type="password"],
-input[type="email"] {
+input[type="email"],
+option,
+select {
   margin-bottom: 1rem;
   padding: 0.75rem;
   border: 1px solid #ccc;
@@ -59,7 +77,9 @@ input[type="email"] {
 
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="email"]:focus {
+input[type="email"]:focus,
+option:focus,
+select:focus {
   outline: none;
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);

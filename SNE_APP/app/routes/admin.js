@@ -20,7 +20,7 @@ function requireRole(requiredRole) {
 
 // Route GET pour récupérer tous les utilisateurs
 adminRouter.get("/users", auth, requireRole(1), (req, res) => {
-  const query = "SELECT idUser, username, email FROM t_user"; // Définition de la requête SQL pour récupérer les informations des utilisateurs
+  const query = "SELECT idUser, username, email, idSection FROM t_user"; // Définition de la requête SQL pour récupérer les informations des utilisateurs
 
   connection.query(query, (error, result) => {
     if (error) {

@@ -37,6 +37,27 @@ export default {
       }
     })
   },
+  /**
+   * Récupére toute les sections
+   * @returns Renvoie un tableau avec toute les sections
+   */
+  getSections() {
+    const token = sessionStorage.getItem('token')
+    return api.get("/section", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  },
+
+  getSection(id) {
+    const token = sessionStorage.getItem("token")
+    return api.get("/section/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  },
 
   /**
    * Récupère toutes les publications

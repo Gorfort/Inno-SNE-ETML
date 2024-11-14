@@ -6,13 +6,22 @@ const userRouter = express.Router();
 
 // Permet de récupérer la page de profile ded l'utilisateur enrgistrer
 userRouter.get("/", auth, (req, res) => {
-  const query = "SELECT username, email FROM t_user WHERE idUser = ?";
+  const query = "SELECT username, email, idSection FROM t_user WHERE idUser = ?";
   connection.query(query, [req.user.userId], (error, user) => {
     if (error) {
       // Log de l'erreur et réponse avec un message d'erreur générique
       console.error("Erreur lors de la récupération de l'utilisateur:", error);
       return res.status(500).json({ message: "Erreur interne du serveur" });
     }
+
+    connection.query("SELECT name FROM t_section WHERE id=?", [user.idSection], (error, section) => {
+      if(error) {
+        console.error("Erreur lors de la récupération de la section:", error);
+        return res.status(500).json({ message: "Erreur interne du serveur" });
+      }
+
+      user.section = section.name
+    })
 
     // Vérification si aucun utilisateur n'est trouvé
     if (user.length === 0) {
