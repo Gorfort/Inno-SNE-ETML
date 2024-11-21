@@ -9,6 +9,10 @@
     </div>
     <div id="comments">
       <h2>Comments:</h2>
+      <form @submit.prevent="onSubmit">
+        <input type="text" placeholder="Add a comment" v-model="commentContent" />
+        <button type="submit" class="submit-button">Commenter</button>
+      </form>
       <div v-show="noComments">No comments yet</div>
       <div class="comment" v-for="comment in comments" :key="comment.idComment">
         <p>{{ comment.username }}</p>
@@ -35,10 +39,6 @@
           </div>
         </div>
       </div>
-      <form @submit.prevent="onSubmit">
-        <input type="text" placeholder="Add a comment" v-model="commentContent" />
-        <button type="submit" class="submit-button">Commenter</button>
-      </form>
     </div>
   </div>
 </template>
@@ -222,6 +222,7 @@ form {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 form input[type="text"] {
