@@ -10,35 +10,13 @@
     <div id="comments">
       <h2>Comments:</h2>
       <div v-show="noComments">No comments yet</div>
-      <div class="comment" v-for="comment in comments" :key="comment.idComment">
-        <p>{{ comment.username }}</p>
-        <p>{{ comment.comment }}</p>
-        <div class="reply-section">
-          <button v-if="replyingToComment !== comment.idComment" class="reply-button" @click="handleReply(comment.idComment)">Reply</button>
-          <div v-if="replyingToComment === comment.idComment" class="reply-form">
-            <form @submit.prevent="onReplySubmit(comment.idComment)">
-              <input type="text" placeholder="Add a reply" v-model="replyContent" />
-              <button type="submit">Submit</button>
-              <button type="button" @click="cancelReply" class="cancel-button">Cancel</button>
-            </form>
-          </div>
-        </div>
+      <TheComment class="comments" v-for="comment in comments" :key="comment.idComment" :comment="comment" />
+      <!-- <div class="comment" v-for="comment in comments" :key="comment.idComment">
         <div class="replies" v-if="comment.replies && comment.replies.length > 0">
-          <div class="reply" v-for="reply in comment.replies" :key="reply.idComment">
-            <div class="reply-content">
-              <div class="reply-header">
-                <p class="reply-author">{{ reply.username }}</p>
-                <p class="reply-date">{{ formatDate(reply.created_At) }}</p>
-              </div>
-              <p>{{ reply.comment }}</p>
-            </div>
-          </div>
+          <TheComment v-for="reply in comment.replies" :key="reply.idComment" :reply="reply" />
         </div>
-      </div>
-      <form @submit.prevent="onSubmit">
-        <input type="text" placeholder="Add a comment" v-model="commentContent" />
-        <button type="submit" class="submit-button">Commenter</button>
-      </form>
+      </div> -->
+      
     </div>
   </div>
 </template>
@@ -46,6 +24,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from '@/Services/axios';
+import TheComment from '@/components/TheComment.vue'
 
 const postArray = ref([]);
 const post = ref({});
@@ -83,7 +62,14 @@ onMounted(async () => {
     noComments.value = true;
     console.log(error);
   }
-});
+})
+
+  // Récupère les commentaire selon le reply_to
+//   try {
+//     const response = await axios.getCommentsByReply();
+
+//   }
+// });
 
 async function onSubmit() {
   comment.value.comment = commentContent.value;
@@ -148,7 +134,7 @@ function formatDate(dateString) {
 }
 </script>
 
-<style scoped>
+<style>
 /* Global styles */
 body {
   background-color: #f0f0f0;

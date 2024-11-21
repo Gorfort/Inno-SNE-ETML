@@ -9,7 +9,7 @@
 
 services:
   db:
-    image: mysql
+    image: mysql:latest
     container_name: db_container
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -82,7 +82,7 @@ services:
     volumes:
       - ./algo:/app
     working_dir: /app
-    command: python3 script.py     
-    
+    command: python3 script.py
+
 volumes:
   dbdata:

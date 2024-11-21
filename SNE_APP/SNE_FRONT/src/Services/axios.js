@@ -86,6 +86,15 @@ export default {
     })
   },
 
+  async getcommentsByReply(id) {
+    const token = sessionStorage.getItem('token')
+    return await api.get(`comment/${id}/comments`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  },
+
   /**
    * Récupère une publication selon un paramètre
    * @param {*} id Correspont à l'id du post à récupérer
