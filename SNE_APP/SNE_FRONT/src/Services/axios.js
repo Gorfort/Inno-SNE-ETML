@@ -22,6 +22,9 @@ export default {
       sessionStorage.setItem('token', response.data.token)
     })
   },
+  loginForSignUp(user) {
+    return api.post('/login', user)
+  },
   signup(user) {
     api.post('signin', user)
   },
@@ -32,6 +35,15 @@ export default {
   getUser() {
     const token = sessionStorage.getItem('token')
     return api.get('/user', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  },
+  getUsers() {
+    const token = sessionStorage.getItem("token")
+
+    return api.get("/admin/users", {
       headers: {
         Authorization: `Bearer ${token}`
       }

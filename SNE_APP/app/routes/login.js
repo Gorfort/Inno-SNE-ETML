@@ -54,6 +54,8 @@ loginRouter.post("/", (req, res) => {
       });
     } else {
       // Si les mots de passe ne correspondent pas
+      console.log(username)
+      console.log(password)
       return res
         .status(401)
         .json({ message: "Le mot de passe est incorrect." });

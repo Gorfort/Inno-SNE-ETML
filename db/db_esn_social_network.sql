@@ -83,7 +83,7 @@ INSERT INTO `t_posts` (`idPost`, `title`, `content`, `fk_User`, `created_At`) VA
 
 CREATE TABLE `t_user` (
   `idUser` int NOT NULL,
-  `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `username` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL UNIQUE,
   `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
   `isAdmin` tinyint(1) DEFAULT '0',

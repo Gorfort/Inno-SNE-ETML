@@ -6,6 +6,7 @@ import { useRouter } from 'vue-router'
 const user = ref({})
 const router = useRouter()
 const sections = ref([])
+const isExist = ref(false)
 
 onMounted(async () => {
   try {
@@ -19,6 +20,18 @@ onMounted(async () => {
 
 async function OnSubmit() {
   try {
+    const response = await axios.loginForSignUp({ "username": "root", "password": "root" })
+    const token = response.data.token
+    sessionStorage.setItem("token-signup", token)
+    const res = await axios.getUsers()
+    const users = res.data.data
+    for(const apiUser of users) {
+      if(apiUser.username == user.value.username) {
+        isExist.value = true
+        return
+      }
+    }
+    isExist.value = false
     await axios.signup(user.value)
     user.value.username = ''
     user.value.password = ''
@@ -37,6 +50,7 @@ document.title = 'ESN - Sign Up';
 <template>
   <div>
     <h1 style="text-align: center;">Sign Up</h1>
+    <p v-if="isExist" style="color: red;">Sorry but this username is already taken</p>
     <form @submit.prevent="OnSubmit">
       <input type="text" placeholder="Username" v-model="user.username" />
       <input type="password" placeholder="Password" v-model="user.password" />
