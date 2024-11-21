@@ -49,7 +49,6 @@ export default {
       }
     })
   },
-
   getSection(id) {
     const token = sessionStorage.getItem("token")
     return api.get("/section/" + id, {
@@ -128,6 +127,26 @@ export default {
         Authorization: `Bearer ${token}`
       }
     })
+  },
+  modifyPost(id, title, content) {
+    const token = sessionStorage.getItem("token")
+
+    return api.put('/post/' + id, 
+      { 
+        "title": title, 
+        "content": content 
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+  },
+  deletePost(id) {
+    const token = sessionStorage.getItem("token")
+
+    return api.delete("/post/" + id, { headers: { Authorization: `Bearer ${token}`}})
   },
 
   /**

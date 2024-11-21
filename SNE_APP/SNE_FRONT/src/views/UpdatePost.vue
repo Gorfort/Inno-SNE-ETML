@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1 style="text-align: center;">Ajoutez un post</h1>
+    <h1 style="text-align: center;">Modifier un post</h1>
     <form @submit.prevent="onSubmit">
       <input type="text" placeholder="Titre" v-model="post.title" />
       <textarea placeholder="Content" v-model="post.content"></textarea>
       <p v-if="!isGood" style="color: red;">Trop de charactères dans l'un des deux champs</p>
-      <button type="submit">Poster</button>
+      <button type="submit">Modifier</button>
     </form>
   </div>
 </template>
@@ -17,6 +17,12 @@ import router from '@/router'
 
 const post = ref({})
 const isGood = ref(true)
+
+const props = defineProps({
+  id: {
+    required: true
+  }
+});
 
 // Set document title when component is mounted
 onMounted(() => {
@@ -31,16 +37,20 @@ onMounted(async () => {
 
   // If the user is not connected, redirect to the login page
   if (!isConnected()) {
-    await alert("You're not connected, please login")
+    alert("You're not connected, please login")
     router.push({ name: 'login' })
   }
+
+  const response = await axios.getPost(props.id)
+  const apiPost = response.data.data[0]
+  post.value.title = apiPost.title
+  post.value.content = apiPost.content
 })
 
 async function onSubmit() {
-  console.log(post.value)
   if(post.value.title.length <= 150 && post.value.content.length <= 250) {
     await axios
-    .addPost(post.value)
+    .modifyPost(props.id, post.value.title, post.value.content)
     .then((response) => {
       console.log(response)
       router.push({ name: 'home' })

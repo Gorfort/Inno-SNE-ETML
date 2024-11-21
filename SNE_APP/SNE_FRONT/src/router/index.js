@@ -21,6 +21,12 @@ const router = createRouter({
       component: () => import('../views/PostView.vue')
     },
     {
+      path: '/post/update/:id',
+      name: 'post-update',
+      props: true,
+      component: () => import('../views/UpdatePost.vue')
+    },
+    {
       path: '/login',
       name: 'login',
       component: () => import('../views/LoginView.vue')
