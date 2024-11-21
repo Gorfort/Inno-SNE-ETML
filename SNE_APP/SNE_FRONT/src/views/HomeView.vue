@@ -8,7 +8,14 @@ const posts = ref([])
 onMounted(async () => {
   try {
     const response = await axios.getPosts()
-    posts.value = response.data.data
+
+    const apiPosts = response.data.data
+
+    apiPosts.sort(function(c, n) {
+      return new Date(n.created_At) - new Date(c.created_At)
+    })
+
+    posts.value = apiPosts
 
     // Set document title
     document.title = 'ESN - Home';
