@@ -45,9 +45,6 @@ async function modifyPost(Post) {
   const response = await axios.getUser()
   const user = response.data.data[0]
 
-  console.log(user.username)
-  console.log(username)
-
   if (!isConnected()) {
     await alert("You're not connected, please login")
     router.push({ name: 'login' })

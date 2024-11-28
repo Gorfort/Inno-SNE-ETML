@@ -37,6 +37,7 @@ async function OnSubmit() {
     user.value.password = ''
     user.value.email = ''
     user.value.section = ""
+    sessionStorage.removeItem("token-signup")
     router.push({ name: 'login' })
   } catch (error) {
     console.log(error)
