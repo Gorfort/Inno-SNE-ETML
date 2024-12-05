@@ -89,4 +89,18 @@ describe("Test pour les routes des posts", () => {
                 .then((res) => expect(res.status).toBe(404))
         })
     })
+
+    describe("Test pour la route GET /", () => {
+        test("Appel de l'API et retourne un status 200", async () => {
+            return await request(app)
+                .get("/post")
+                .then((res) => expect(res.status).toBe(200))
+        })
+
+        test("Appel de l'API et retourne un tableau d'élément", () => {
+            return request(app)
+                .get("/post")
+                .then((res) => expect(res.body.data).toBeInstanceOf(Array))
+        })
+    })
 })
