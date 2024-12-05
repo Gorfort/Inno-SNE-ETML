@@ -100,7 +100,8 @@ INSERT INTO `t_user` (`idUser`, `username`, `password`, `email`, `isAdmin`, `sta
 (1, 'Alessio', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'alessio.lopardo@eduvaud.ch', 0, 'not_verified', 1, '2024-06-12 09:20:43'),
 (2, 'Admin', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'admin@example.com', 1, 'not_verified', 1, '2024-06-12 09:20:43'),
 (3, 'Kent1', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'quentin.metroz@eduvaud.ch', 0, 'not_verified', 1, '2024-06-12 09:20:43'),
-(4, 'Gorfort', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'thibaud.racine@eduvaud.ch', 0, 'not_verified', 1, '2024-06-12 09:20:43');
+(4, 'Gorfort', '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8', 'thibaud.racine@eduvaud.ch', 0, 'not_verified', 1, '2024-06-12 09:20:43'),
+(5, 'root', '4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2', 'root@gmail.com', 0, 'not_verified', 1, '2024-06-12 09:20:43');
 
 CREATE TABLE `t_section` (
   `id` int NOT NULL AUTO_INCREMENT,
