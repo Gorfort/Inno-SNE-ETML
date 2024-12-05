@@ -87,6 +87,11 @@ commentRouter.post("/", auth, (req, res) => {
 
 commentRouter.put("/:id", auth, (req, res) => {
   const query = "UPDATE `t_comments` SET `comment`= ? WHERE idComment = ? ";
+  
+  if(!req.body.comment) {
+    return res.status(404).json({ message: "Le commentaire est obligatoire" });
+  }
+
   connection.query(
     query,
     [req.body.comment, req.params.id],

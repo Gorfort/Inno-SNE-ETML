@@ -35,4 +35,28 @@ describe("Test pour les routes des comments", () => {
                 .then(res => expect(res.status).toBe(400))
         })
     })
+
+    describe("Test de la route PUT /:id", () => {
+        test("Appel de l'API et retourne un status 200", async () => {
+            return await request(app)
+                .put("/comment/1")
+                .set("Authorization", `Bearer ${process.env.TOKEN}`)
+                .send({ comment: "Test de commentaire modifié" })
+                .then(res => expect(res.status).toBe(200))
+        })
+
+        test("Appel de l'API sans token et retourne un status 401", async () => {
+            return await request(app)
+                .put("/comment/1")
+                .send({ comment: "Test de commentaire modifié" })
+                .then(res => expect(res.status).toBe(401))
+        })
+
+        test("Appel de l'API sans donnée et retourne un status 400", async () => {
+            return await request(app)
+                .put("/comment/1")
+                .set("Authorization", `Bearer ${process.env.TOKEN}`)
+                .then(res => expect(res.status).toBe(404))
+        })
+    })
 })
