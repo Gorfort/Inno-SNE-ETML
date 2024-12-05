@@ -70,6 +70,12 @@ postRouter.get("/:id/comments", auth, (req, res) => {
 
 // Route qui permet de mettre à jour une publication
 postRouter.put("/:id", auth, (req, res) => {
+  if (!req.body.title || !req.body.content) {
+    return res
+      .status(400)
+      .json({ message: "Le titre et le contenu sont obligatoire" });
+  }
+  
   const query =
     "UPDATE `t_posts` SET `title`= ?,`content`= ? WHERE idPost = ? ";
   connection.query(
