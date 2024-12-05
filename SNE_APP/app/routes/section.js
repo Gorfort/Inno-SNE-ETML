@@ -26,6 +26,11 @@ sectionRouter.get('/:id', auth, (req, res) => {
             return res.status(500).json({ message });
         }
 
+        if(result[0] == undefined) {
+            const message = "Erreur : Cette section n'existe pas"
+            return res.status(404).json({ message })
+        }
+
         return res.status(200).json({ message: "Voici la section demandé", data: result })
     })
 })
@@ -37,6 +42,11 @@ sectionRouter.get("/name/:name", auth, (req, res) => {
             const message = "Erreur du serveur interne, veuillez ressayer plus tard";
             console.log(error);
             return res.status(500).json({ message });
+        }
+
+        if(result[0] == undefined) {
+            const message = "Erreur : Cette section n'existe pas"
+            return res.status(404).json({ message })
         }
 
         return res.status(200).json({ message: "Voici la section demandé", data: result })
@@ -69,7 +79,7 @@ sectionRouter.put("/:id", auth, (req, res) => {
             return res.status(500).json({ message });
         }
 
-        if(!result) {
+        if(result[0] == undefined) {
             const message = "Erreur : Cette section n'existe pas"
             return res.status(404).json({ message })
         }
@@ -97,7 +107,7 @@ sectionRouter.delete("/:id", auth, (req, res) => {
             return res.status(500).json({ message });
         }
 
-        if(!result) {
+        if(result.length == 0) {
             const message = "Erreur : Cette section n'existe pas"
             return res.status(404).json({ message })
         }
