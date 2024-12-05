@@ -65,4 +65,6 @@ import sectionRouter from "./routes/section.js";
 app.use('/section', sectionRouter)
 
 // Démarrage du serveur en HTTP
-app.listen(443);
+const server = app.listen(443);
+
+export { app, server }
