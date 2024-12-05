@@ -32,7 +32,7 @@ USE `db_esn_social_network`;
 CREATE TABLE `t_comments` (
   `idComment` int NOT NULL,
   `comment` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
-  `reply_to` int NOT NULL,
+  `reply_to` int NOT NULL DEFAULT 0,
   `fk_User` int NOT NULL,
   `fk_Post` int NOT NULL,
   `created_At` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP

@@ -79,7 +79,6 @@ commentRouter.post("/", auth, (req, res) => {
           "Erreur du serveur interne, Veuillez ressayer plus tard";
         return res.status(500).json({ message });
       } else {
-        console.log(result);
         res.json({ message: "Le commentaire à bien été crée" });
       }
     }
