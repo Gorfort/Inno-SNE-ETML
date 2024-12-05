@@ -75,7 +75,7 @@ postRouter.put("/:id", auth, (req, res) => {
       .status(400)
       .json({ message: "Le titre et le contenu sont obligatoire" });
   }
-  
+
   const query =
     "UPDATE `t_posts` SET `title`= ?,`content`= ? WHERE idPost = ? ";
   connection.query(
@@ -122,6 +122,7 @@ postRouter.post("/", auth, (req, res) => {
 postRouter.delete("/:id", auth, (req, res) => {
   const query = "DELETE FROM `t_posts` WHERE idPost = ?";
   connection.query(query, [req.params.id], (error, result) => {
+    console.log(error);
     if (error) {
       const message = "Erreur du serveur interne, Veuillez ressayer plus tard";
       return res.status(500).json({ message });
