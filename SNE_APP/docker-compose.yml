@@ -9,7 +9,7 @@
 
 services:
   db:
-    image: mysql
+    build: ../
     container_name: db_container
     environment:
       MYSQL_ROOT_PASSWORD: root
