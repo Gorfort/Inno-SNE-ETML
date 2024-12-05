@@ -1,4 +1,4 @@
-import { expect, test, describe, afterEach, afterAll } from '@jest/globals';
+import { expect, test, describe, afterAll } from '@jest/globals';
 import { app, server } from "../server"
 import request from "supertest"
 import dotenv from "dotenv"

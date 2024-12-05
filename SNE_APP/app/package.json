@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js -L --env-file=.env",
-    "test": "jest --env-file=.env"
+    "test": "jest --env-file=.env --runInBand"
   },
   "dependencies": {
     "cors": "^2.8.5",

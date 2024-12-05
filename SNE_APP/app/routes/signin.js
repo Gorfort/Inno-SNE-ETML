@@ -8,7 +8,7 @@ signinRouter.post("/", (req, res) => {
   // Récupère username et password de req.body
   const { username, password, email, section } = req.body;
 
-  console.log(req.body)
+  console.log(username, password, email, section)
 
   // Renvoie une erreur si l'utilisateur ne remplie pas les champs requis
   if (!username || !password || !email || !section) {
