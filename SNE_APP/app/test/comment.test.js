@@ -59,4 +59,26 @@ describe("Test pour les routes des comments", () => {
                 .then(res => expect(res.status).toBe(404))
         })
     })
+
+    describe("Test de la route DELETE /:id", () => {
+        test("Appel de l'API et retourne un status 200", async () => {
+            return await request(app)
+                .delete("/comment/1")
+                .set("Authorization", `Bearer ${process.env.TOKEN}`)
+                .then(res => expect(res.status).toBe(200))
+        })
+
+        test("Appel de l'API sans token et retourne un status 401", async () => {
+            return await request(app)
+                .delete("/comment/1")
+                .then(res => expect(res.status).toBe(401))
+        })
+
+        test("Appel de l'API avec une id incorecte et retourne un status 404", async () => {
+            return await request(app)
+                .delete("/comment/-1")
+                .set("Authorization", `Bearer ${process.env.TOKEN}`)
+                .then(res => expect(res.status).toBe(404))
+        })
+    })
 })
